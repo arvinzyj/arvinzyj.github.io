@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>机器人中的数值优化（四） | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 锥规划（笔记）锥和对称锥尖锥如果一组点$\kappa\subseteq\mathbb{R}^n$满足以下条件，则称为尖锥：$$\begin{aligned}&amp;{\text{Conic:}\quad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器人中的数值优化（四）">
+<meta property="og:url" content="http://example.com/2024/02/26/305-2024-02-24-Math-Optimization/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 锥规划（笔记）锥和对称锥尖锥如果一组点$\kappa\subseteq\mathbb{R}^n$满足以下条件，则称为尖锥：$$\begin{aligned}&amp;{\text{Conic:}\quad">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2024-02-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-19T08:41:26.079Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "机器人中的数值优化（四）",
+  "url": "http://example.com/2024/02/26/305-2024-02-24-Math-Optimization/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2024-02-25T16:00:00.000Z",
+  "dateModified": "2025-08-19T08:41:26.079Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/02/26/305-2024-02-24-Math-Optimization/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '机器人中的数值优化（四）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: None;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">机器人中的数值优化（四）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">机器人中的数值优化（四）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-25T16:00:00.000Z" title="Created 2024-02-26 00:00:00">2024-02-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-08-19T08:41:26.079Z" title="Updated 2025-08-19 16:41:26">2025-08-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>文档维护：<code>Arvin</code></p>
+<p>网页部署：<code>Arvin</code></p>
+<p>▶</p>
+<p><strong>写在前面</strong>：本文内容是作者在深蓝学院<a target="_blank" rel="noopener" href="https://www.shenlanxueyuan.com/course/659">机器人中的数值优化</a>学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。</p>
+<h1 id="锥规划（笔记）"><a href="#锥规划（笔记）" class="headerlink" title="锥规划（笔记）"></a>锥规划（笔记）</h1><h2 id="锥和对称锥"><a href="#锥和对称锥" class="headerlink" title="锥和对称锥"></a>锥和对称锥</h2><h3 id="尖锥"><a href="#尖锥" class="headerlink" title="尖锥"></a>尖锥</h3><p>如果一组点$\kappa\subseteq\mathbb{R}^n$满足以下条件，则称为尖锥：<br>$$<br>\begin{aligned}&amp;{\text{Conic:}\quad a\in\mathcal{K},\lambda\geq0\Rightarrow\lambda a\in\mathcal{K}}\&amp;{\text{Pointed:}\quad a\in\mathcal{K}\mathrm{<del>and</del>}-a\in\mathcal{K}\Rightarrow a&#x3D;0}\end{aligned}<br>$$<br>第一个条件即向量$a$在集合$\mathcal{K}$中，$\lambda\geq0$，则$\lambda a$也必然在集合$\mathcal{K}$中；第二个条件是若向量$a$在集合$\mathcal{K}$中，则向量$-a$不在集合$\mathcal{K}$中，除非向量$a&#x3D;0$。</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/1.png" alt="1"></p>
+<h3 id="凸锥"><a href="#凸锥" class="headerlink" title="凸锥"></a>凸锥</h3><p>在尖锥的基础上，若进一步满足$a,a^{\prime}\in\mathcal{K}\Rightarrow a+a^{\prime}\in\mathcal{K}$，则为凸锥。截面可以是任意形状，比如凸多面体、椭圆、超椭圆。</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/2.png" alt="2"></p>
+<ul>
+<li><p>多面体锥</p>
+<ol>
+<li>由$Ax\leq b$构成的多面体，其中$x\in\mathbb{R}^n$。</li>
+<li>增加一个维度此时空间$(t,x)\in\mathbb{R}^{n+1}$，构成一个多面体锥${t\geq0,Ax\leq bt}$。</li>
+<li>$t&#x3D;1$时的切片截面是原始多面体。</li>
+</ol>
+<p><img src="/./305-2024-02-24-Math-Optimization/3.png" alt="3"></p>
+</li>
+<li><p>椭圆锥</p>
+<ol>
+<li>椭圆$x^\top Px+q^\top x+r\leq0$，其中$P\succ0$且$x\in\mathbb{R}^n$。</li>
+<li>进行仿射变换$\Longleftrightarrow|Ax+b|\leq c$。</li>
+<li>${t\geq0,|Ax+bt|\leq ct}$是$(t,x)\in\mathbb{R}^{n+1}$空间中的一个椭圆锥。</li>
+<li>$t&#x3D;1$时的切片是原始椭圆。</li>
+</ol>
+</li>
+</ul>
+<p>以下三类锥，分别对应LP线性规划、SOCP二次锥规划、SDP半定规划。</p>
+<h3 id="常见的锥及其性质"><a href="#常见的锥及其性质" class="headerlink" title="常见的锥及其性质"></a>常见的锥及其性质</h3><ul>
+<li><p>非负象限<br>$$<br>\mathbb{R}_{\geq0}^n&#x3D;{x\in\mathbb{R}^n\mid x_i\geq0,i&#x3D;1,\ldots,n}<br>$$<br><img src="/./305-2024-02-24-Math-Optimization/4.png" alt="4"></p>
+</li>
+<li><p>二阶锥<br>$$<br>\mathcal{Q}^n&#x3D;\left{\left(x_0,x_1\right)^{\mathrm{T}}\in\mathbb{R}\times\mathbb{R}^{n-1}\mid x_0\geq\left|x_1\right|_2\right}<br>$$<br><img src="/./305-2024-02-24-Math-Optimization/5.png" alt="5"></p>
+</li>
+<li><p>半正定锥<br>$$<br>\mathcal{S}_{\geq0}^n&#x3D;\left{x\in\mathbb{R}^{n(n+1)&#x2F;2}\mid z^\mathrm{T}\max(x)z\geq0,\forall z\in\mathbb{R}^n\right}<br>$$</p>
+</li>
+</ul>
+<p><img src="/./305-2024-02-24-Math-Optimization/6.png" alt="6"></p>
+<p>经过仿射变换或旋转，锥可以拓展至如下形式：</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/7.png" alt="7"></p>
+<p><img src="/./305-2024-02-24-Math-Optimization/8.png" alt="8"></p>
+<p><img src="/./305-2024-02-24-Math-Optimization/9.png" alt="9"></p>
+<h4 id="对称锥"><a href="#对称锥" class="headerlink" title="对称锥"></a>对称锥</h4><p>$\mathbb{R}<em>{\geq0}^n,\mathcal{Q}^n,\mathcal{S}</em>{\geq0}^n$这些锥都是对称的，我们可以将其表示成平方锥（cones of squares）。</p>
+<ul>
+<li><p>正象限锥positive orthant<br>$$<br>\mathbb{R}_{\geq0}^n&#x3D;{x\in\mathbb{R}^n\mid x_i\geq0,i&#x3D;1,\ldots,n}&#x3D;\color{red}{[y]^2\mid y\in\mathbb{R}^n}<br>$$</p>
+</li>
+<li><p>二阶锥second-order cone<br>$$<br>\mathcal{Q}^n&#x3D;\left{\left(x_0,x_1\right)^{\mathrm{T}}\in\mathbb{R}\times\mathbb{R}^{n-1}\mid x_0\geq\left|x_1\right|_2\right}&#x3D;\color{red}\left{\frac{1}{\sqrt{2}}\left(y_0^2+y_1^{\mathrm{T}}y_1,2y_0y_1\right)^{\mathrm{T}}\mid\left(y_0,y_1\right)^{\mathrm{T}}\in\mathbb{R}\times\mathbb{R}^{n-1}\right}<br>$$</p>
+</li>
+<li><p>半正定锥Positive semi-definite cone<br>$$<br>\mathcal{S}_{\geq0}^n&#x3D;\left{x\in\mathbb{R}^{n(n+1)&#x2F;2}\mid z^\text{T }{ \max ( x ) }z\geq0,\forall z\in\mathbb{R}^n\right}&#x3D;\color{red}\left{\operatorname{vec}(\operatorname{mat}(y)\operatorname{mat}(y))\mid y\in\mathbb{R}^{n(n+1)&#x2F;2}\right}<br>$$</p>
+</li>
+</ul>
+<h4 id="平方操作"><a href="#平方操作" class="headerlink" title="平方操作"></a>平方操作</h4><p>锥是对称的当且仅当他是平方时<br>$$<br>\begin{Bmatrix}x^2:&#x3D;x\circ x\mid x\in\mathbb{R}^n\end{Bmatrix}<br>$$<br>必须满足下面特性：</p>
+<ul>
+<li>$x\circ y$是线性的，即$kx\circ y&#x3D;k(x\circ y)$</li>
+<li>$x\circ y&#x3D;y\circ x$</li>
+<li>$x^2\circ(y\circ x)&#x3D;(x^2\circ y)\circ x$</li>
+<li>$\langle x,y\circ z\rangle&#x3D;\langle x\circ y,z\rangle $</li>
+</ul>
+<p>$(\mathbb{R}^n,\circ)$被称为欧几里得乔丹代数Euclidean Jordan algebra。通过代数，可以用统一的方式研究对称锥形成的约束。</p>
+<p>圈乘的定义：</p>
+<ul>
+<li><p>正象限锥<br>$$<br>\mathbb{R}_{\geq0}^n&#x3D;{y\circ y\mid y\in\mathbb{R}^n}<br>$$<br>其定义为：<br>$$<br>x\circ y:&#x3D;\operatorname{diag}(x)y<br>$$</p>
+</li>
+<li><p>二阶锥<br>$$<br>\mathcal{Q}^n&#x3D;\left{y\circ y\mid y&#x3D;(y_0,y_1)^\text{T}\in\mathbb{R}\times\mathbb{R}^{n-1}\right}<br>$$<br>其定义为：<br>$$<br>x\circ y:&#x3D;\dfrac{1}{\sqrt{2}}\begin{bmatrix}x^Ty\x_0y_1+y_0x_1\end{bmatrix}<br>$$</p>
+</li>
+<li><p>半正定锥<br>$$<br>\mathcal{S}_{\geq0}^n&#x3D;\left{y\circ y\mid y\in\mathbb{R}^{n(n+1)&#x2F;2}\right}<br>$$<br>其定义为：<br>$$<br>x\circ y:&#x3D;\frac12\mathrm{vec}\big(\mathrm{mat}(x)\mathrm{mat}(y)+\mathrm{mat}(y)\mathrm{mat}(x)\big)<br>$$</p>
+</li>
+</ul>
+<h4 id="谱分解"><a href="#谱分解" class="headerlink" title="谱分解"></a>谱分解</h4><p>每个欧几里得代数都有其谱分解：<br>$$<br>x&#x3D;\sum_{i&#x3D;1}^\theta\lambda_iq_i<br>$$<br>其中$\lambda_i$是特征值，$q_i$是特征向量。</p>
+<p>分解后的每个特征向量，都满足：<br>$$<br>q_i^2&#x3D;q_i,\quad q_i\circ q_{j(\neq i)}&#x3D;0<br>$$<br>易知：</p>
+<ul>
+<li>特征向量是正交的$\langle q_i,q_{j(\neq i)}\rangle&#x3D;\langle q_i\circ q_i,q_{j(\neq i)}\rangle&#x3D;\langle q_i,q_i\circ q_{j(\neq i)}\rangle&#x3D;0$</li>
+<li>当且仅当一个向量的所有特征值都非负时，该向量在对称锥中。</li>
+<li>当且仅当一个向量的所有特征值都为正时，该向量在对称锥的内部。</li>
+</ul>
+<p>常见锥体的谱分解：</p>
+<ul>
+<li><p>正象限锥（positive orthant）<br>$$<br>\lambda_i&#x3D;x_i,\quad q_i&#x3D;e_i<br>$$</p>
+</li>
+<li><p>二阶锥（second-order cone）<br>$$<br>\lambda_i&#x3D;\frac{x_0\pm|x_1|_2}{\sqrt{2}},\quad q_i&#x3D;\frac1{\sqrt{2}}\begin{bmatrix}1\\pm x_1&#x2F;|x_1|_2\end{bmatrix}<br>$$</p>
+</li>
+<li><p>半正定锥（second-order cone）<br>$$<br>\lambda_i&#x3D;\lambda_i,\quad q_i&#x3D;\mathrm{vec}(v_iv_i^\mathrm{T})<br>$$<br>其中$\lambda_i$和$v_i$是$mat(x)$的特征值和特征向量。</p>
+</li>
+</ul>
+<h4 id="对称锥的自对偶性"><a href="#对称锥的自对偶性" class="headerlink" title="对称锥的自对偶性"></a>对称锥的自对偶性</h4><p>锥$\mathcal{K}$的对偶锥记为$\mathcal{K}^*$，即与中$\mathcal{K}$任意元素$y$的内积大于0的$x$的集合，如下所示：<br>$$<br>\mathcal{K}^*&#x3D;{x\mid\langle x,y\rangle\geq0,\forall y\in\mathcal{K}}<br>$$<br>因此对称锥的对偶锥是他本身，即$\mathcal{K}^*&#x3D;\mathcal{K}$。</p>
+<h4 id="对称锥的应用"><a href="#对称锥的应用" class="headerlink" title="对称锥的应用"></a>对称锥的应用</h4><p>回顾一下之前约束优化问题的分类：</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/10.png" alt="10"></p>
+<p>上面的包含关系是怎么来的呢？</p>
+<ol>
+<li><p>LP写成QP形式</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/11.png" alt="11"></p>
+</li>
+<li><p>QP写成SOCP的形式</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/12.png" alt="12"></p>
+</li>
+<li><p>SOCP写成SDP形式</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/13.png" alt="13"></p>
+</li>
+</ol>
+<p>二阶锥规划问题是一类对称锥规划问题，另外有一部分半定规划问题也是对称锥规划问题，也就是说这两类规划问题的不等式约束条件都可以表示为解处于一个对称锥内的形式。SDP是最广泛的对称凸锥优化问题！许多优化问题可以通过 Lasserre hierarchy 结构简化为SDP。</p>
+<h2 id="锥增广拉格朗日函数"><a href="#锥增广拉格朗日函数" class="headerlink" title="锥增广拉格朗日函数"></a>锥增广拉格朗日函数</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/673790954">数值优化笔记（三）：锥规划问题</a></p>
+<h3 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h3><p>对称锥规划问题可以表示成：<br>$$<br>\begin{aligned}<br>&amp;\min_{x\in\mathbb{R}^{n}} c^{\mathrm{T}}x  \<br>&amp;\mathrm{s.t.} A_{i}x+b_{i}\in\mathcal{K}<em>{i},i&#x3D;1,\ldots,m  \<br>&amp;Gx&#x3D;h<br>\end{aligned}<br>$$<br>由前面我们可以根据对称锥的概念，所有对称锥内部的向量，可以表示为一个$\mathbb{R}^n$向量关于圈乘<br>$$<br>\begin{aligned}<br>&amp;\min</em>{x,s} c^{\mathrm{T}}x  \<br>&amp;\mathbf{s.t.} A_ix+b_i&#x3D;{s_i\circ s_i},\mathrm{~}i&#x3D;1,\ldots,m  \<br>&amp;Gx&#x3D;h<br>\end{aligned}<br>$$<br>因此我们可以构建对于等式约束的拉格朗日函数如下：<br>$$<br>\mathcal{L}<em>\rho(x,s,\lambda,\nu):&#x3D;c^\mathrm{T}x+\frac{\rho}{2}\begin{Vmatrix}Gx-h+\frac{\lambda}{\rho}\end{Vmatrix}^2+\frac{\rho}{2}\sum</em>{i&#x3D;1}^m\begin{Vmatrix}A_ix+b_i-s_i\circ s_i+\frac{\nu_i}{\rho}\end{Vmatrix}^2<br>$$</p>
+<p>$$<br>\begin{cases}x^{k+1}&#x3D;\arg\min_{x,s}\mathcal{L}(x^k,s^k,\lambda^k,\mu^k,\rho^k)\\lambda^{k+1}&#x3D;\lambda^k+\rho^k(Gx^{k+1}-h)\\mu_i^{k+1}&#x3D;\mu_i^k+\rho^k(A_ix^{k+1}+b_i-s_i\circ s_i)\\rho^{k+1}&#x3D;\min(\rho^k+\gamma\rho^k,\beta)\end{cases}<br>$$</p>
+<p>其中，$k$代表迭代轮数，$\lambda$和$\mu_i$是拉格朗日乘子，$\rho$是惩罚系数。当时上述式子中多出来一个变量$s$。下面是将其消去的推导过程：</p>
+<p>对于$\min_{x,s}\mathcal{L}$问题，由于$s$只和最后一项有关，因此对于任何一个$x$，都可以很容易地求解出对应的最优的$s^*$的取值。只需要求解下面的优化问题即可，这里可以将$x$看作常量：<br>$$<br>\begin{aligned}\min_s\frac{1}{2}\rho\sum_{i&#x3D;1}^m||A_ix+b_i-s_i\circ s_i+\frac{\mu_i}{\rho}||^2\end{aligned}<br>$$<br>上述式子中$A_{i}x+b_{i}+\frac{\mu_{i}}{\rho}$与$s$无关，并且$s_i$之间也无关联。因此上述式子可以写成：<br>$$<br>\min_{s}||v-s_i\circ s_i||^2<br>$$<br>其中$v&#x3D;A_{i}x+b_{i}+\frac{\mu_{i}}{\rho}$。</p>
+<p>即<br>$$<br>\min_s\left|v-s_i\circ s_i\right|^2&#x3D;\min_{x\in\mathcal{K}}\left|v-x\right|^2<br>$$<br>我们从几何角度去理解这个问题，事实上这个问题的最优解就是找到向量$v$在对称锥$\mathcal{K}$上的投影向量，此时$v-x$与锥垂直，即距离最近。如下图所示：</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/14.png" alt="14"></p>
+<p>我们用$P_{\kappa}(v)$表示向量$v$在$\mathcal{K}$上的投影，则可以得到下式：<br>$$<br>\min_s\left|v-s_i\circ s_i\right|^2&#x3D;\left|P_{\mathcal{K}}\left(-v\right)\right|^2<br>$$<br>且根据对称锥的另一个特性Moreau decomposition（此处不具体推导，看下图即可）:</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/15.png" alt="15"></p>
+<p>由上可得：<br>$$<br>v-P_{\mathcal{K}}(v)&#x3D;-P_{\mathcal{K}}(-v)<br>$$<br>最终我们可以得到：<br>$$<br>\min_s\left|v-s_i\circ s_i\right|^2&#x3D;\left|P_{\mathcal{K}}(-v)\right|^2<br>$$<br>所以原拉格朗日函数：<br>$$<br>\min_s\mathcal{L}<em>\rho(x,s,\lambda,\nu)&#x3D;c^\mathrm{T}x+\frac\rho2\begin{Vmatrix}Gx-h+\frac\lambda\rho\end{Vmatrix}^2+\frac\rho2\sum</em>{i&#x3D;1}^m\begin{Vmatrix}P_{\mathcal{K}<em>i}\big(-A_ix-b_i-\frac{\nu_i}\rho\big)\end{Vmatrix}^2<br>$$<br>我们用$\mu&#x3D;-v$，因此对称锥的增广拉格朗日量：<br>$$<br>\mathcal{L}<em>\rho(x,\lambda,\mu):&#x3D;c^\mathrm{T}x+\frac\rho2\Big{\left|Gx-h+\frac\lambda\rho\right|^2+\sum</em>{i&#x3D;1}^m\left|P</em>{\mathcal{K}_i}\left(\frac{\mu_i}\rho-A_ix-b_i\right)\right|^2\Big}-\color{gray}\frac1{2\rho}\Big{|\lambda|^2+|\mu|^2\Big}<br>$$<br>其原函数下降和对偶函数上升过程与PHR-ALM相同。</p>
+<p>特别的，对偶变量的更新如下：$(-\mu_i)\leftarrow(-\mu_i)+\rho(A_ix+b-s_i\circ s_i)$，其中$s_{i}\circ s_{i}&#x3D;P_{\mathcal{K}}(A_{i}x+b_{i}+\frac{-\mu_{i}}{\rho})$。</p>
+<p>再运用一次莫罗分解，可以得到：<br>$$<br>\mu_i\leftarrow P_{\mathcal{K}_i}(\mu_i-\rho(A_ix+b_i))<br>$$<br>总结如下</p>
+<p>原问题为：<br>$$<br>\begin{aligned}<br>&amp;\min_{x\in\mathbb{R}^{n}} c^{\mathrm{T}}x  \<br>&amp;\mathrm{s.t.} A_{i}x+b_{i}\in\mathcal{K}<em>{i},i&#x3D;1,\ldots,m  \<br>&amp;Gx&#x3D;h<br>\end{aligned}<br>$$<br>其增广拉格朗日函数为：<br>$$<br>\mathcal{L}<em>\rho(x,\lambda,\mu):&#x3D;c^\mathrm{T}x+\frac\rho2\Big{\left|Gx-h+\frac\lambda\rho\right|^2+\sum</em>{i&#x3D;1}^m\left|P</em>{\mathcal{K}_i}\left(\frac{\mu_i}\rho-A_ix-b_i\right)\right|^2\Big}-\color{gray}\frac1{2\rho}\Big{|\lambda|^2+|\mu|^2\Big}<br>$$<br>其中$\rho &gt; 0, \mu_i \in \mathcal{K}_i$，然后进行迭代<br>$$<br>\begin{cases}x\leftarrow\operatorname{argmin}_x\mathcal{L}<em>\rho(x,\lambda,\mu)\\lambda\leftarrow\lambda+\rho(Gx-h)\\mu_i\leftarrow P</em>{\mathcal{K}_i}\big(\mu_i-\rho(A_ix+b_i)\big)\\rho\leftarrow\min[(1+\gamma)\rho,~\beta]\end{cases}<br>$$</p>
+<ul>
+<li>初始化$\rho_{\mathrm{ini}}&#x3D;1,\lambda_{\mathrm{ini}}&#x3D;\mu_{\mathrm{ini}}&#x3D;0,\gamma&#x3D;1,\beta&#x3D;10^3$</li>
+<li>迭代终止条件$\max\left[\left|Gx-h\right|<em>\infty,\max_i\left|\frac{\mu}{\rho}-P</em>{\mathcal{K}_i}\big(\frac{\mu}{\rho}-A_ix-b_i\big)\right|<em>\infty\right]&lt;\epsilon</em>{\mathrm{cons}},\left|\nabla_x\mathcal{L}_\rho(x,\lambda,\mu)\right|<em>\infty&lt;\epsilon</em>{\mathrm{prec}}$</li>
+</ul>
+<h3 id="锥投影的计算"><a href="#锥投影的计算" class="headerlink" title="锥投影的计算"></a>锥投影的计算</h3><p>根据谱分解的概念，任意一个向量都可以分解为：<br>$$<br>x&#x3D;\sum_{i&#x3D;1}^\theta\lambda_iq_i<br>$$<br>对于不同的锥$q_i$也是不同的，投影操作可以被描述为：<br>$$<br>\mathrm{P}<em>{\mathcal{K}}(x)&#x3D;\sum</em>{i&#x3D;1}^\theta\max(\lambda_i,0)q_i<br>$$<br>上述式子的含义是，把向量$x$按照$q_i$进行分解，并将所有小于0的特征值设置为0，然后再进行线性组合。即把分解后所有特征值为负数的部分舍弃。</p>
+<h3 id="半光滑牛顿方法"><a href="#半光滑牛顿方法" class="headerlink" title="半光滑牛顿方法"></a>半光滑牛顿方法</h3><p>锥增广拉格朗日算法的迭代过程中需要求解一个无约束优化问题：<br>$$<br>\min_{x}\mathcal{L}<em>{\rho}(x,\lambda,\mu)&#x3D;c^{\mathrm{T}}x+\frac{\rho}{2}\Big{\left|Gx-h+\frac{\lambda}{\rho}\right|^{2}+\sum</em>{i&#x3D;1}^{m}\left|P\chi_{i}\left(\frac{\mu_{i}}{\rho}-A_{i}x-b_{i}\right)\right|^{2}\Big}<br>$$<br>这个问题中，目标函数是一个一阶连续可微的凸函数，但无法保证二阶连续可微，因此其Hessian未必是连续的。因此，上述问题可以用梯度下降法和拟牛顿法进行求解，但无法用一般的牛顿方法进行求解。</p>
+<p>使用拟牛顿法求解时，</p>
+<p>该子问题就是增广拉格朗日函数对$x$求最小值，即<br>$$<br>\mathcal{L}_\rho(x,\lambda,\mu)\text{w.r.t.}x<br>$$<br>其梯度和Hessian矩阵是<br>$$<br>g&#x3D;\nabla_x\mathcal{L}_\rho(x,\lambda,\mu),H&#x3D;\nabla_x^2\mathcal{L}_\rho(x,\lambda,\mu)<br>$$<br>圆锥增广拉格朗日函数的凸性保证了<br>$$<br>H\succeq0<br>$$<br>所以我们是否可以使用拟牛顿法进行下列更新？<br>$$<br>(H+\epsilon I)d&#x3D;-g,\mathrm{~}\epsilon&#x3D;\min(1,|g|_\infty)<br>$$<br>在二阶连续可微的地方当然可以，但是当最优解在边界上（锥的边缘），很有可能在Hessian不存在的区域，可以采用如下介绍的半光滑的牛顿方法。</p>
+<p><strong>半光滑的定义</strong>：</p>
+<p>定义一个向量函数：$F(x):\mathbb{R}^n\to\mathbb{R}^n$，那么当$F(x)$在$x$处方向可导，且<br>$$<br>\lim_{d\in\mathbb{R}^n,d\to0}\frac{||F(x+d)-F(x)-J(d)d||}{||d||}&#x3D;0, \forall J(d)&#x3D;\partial F(x+d)<br>$$<br>则称$F(x)$在$x$处是半光滑的。</p>
+<p>如果再进一步，若满足下列条件，它是强半光滑的<br>$$<br>\lim_{d\in\mathbb{R}^n,\mathrm{<del>}d\to0}\frac{|F(x+d)-F(x)-J(d)d|}{|d|^2}&lt;\infty,\mathrm{</del>}\forall J(d)\in\partial F(x+d)<br>$$<br><strong>B次微分的定义</strong>：</p>
+<p>$\partial_BF(x)&#x3D;{\lim_{k\to\infty}F’(x^k)|x^k\in D_F,x^k\to x}$，其中$D_F$代表的是$x^k$的可行域。B次微分和一般次微分的关系是：$\partial F(x)&#x3D;\operatorname{conv}(\partial_BF(x))$，其中$conv$代表取凸包的操作。</p>
+<p><strong>半光滑牛顿方法</strong>：</p>
+<p>如果$F(x):\mathbb{R}^n\mapsto\mathbb{R}^n$是半光滑的，则$J(x)\in\partial_BF(x)$是非奇异的<br>$$<br>x^{k+1}&#x3D;x^k-J(x^k)^{-1}F(x^k)<br>$$<br>也就是说，用B次微分代替Hessian矩阵参与牛顿迭代，这就是所谓的<strong>半光滑牛顿法</strong>。</p>
+<p>上述迭代可以达到局部超线性收敛<br>$$<br>F(x)&#x3D;0<br>$$<br>如果$F(x):\mathbb{R}^n\mapsto\mathbb{R}^n$是强光滑的，迭代可以到达局部二次收敛<br>$$<br>g(x):&#x3D;\nabla_x\mathcal{L}_\rho(x,\lambda,\mu)<br>$$<br>锥增广拉格朗日函数的梯度是强半光滑的，因为它是分段C2。<br>因此，我们可以如下计算半平滑牛顿步来进行无约束优化<br>$$<br>\begin{aligned}<br>&amp;(H+{\epsilon}I)d&#x3D;-{g} \<br>&amp;g&#x3D;\nabla_x\mathcal{L}_\rho(x,\lambda,\rho) \<br>&amp;H\in\partial_B\nabla_x\mathcal{L}_\rho(x,\lambda,\rho) \<br>&amp;\epsilon&#x3D;\min(1,|g|_\infty)&#x2F;10<br>\end{aligned}<br>$$<br>如何计算梯度和B次微分呢？</p>
+<p>梯度可以直接进行计算：<br>$$<br>\nabla_x\mathcal{L}<em>\rho(x,\lambda,\mu)&#x3D;c+G^\mathrm{T}(\lambda+\rho(Gx-h))-\sum</em>{i&#x3D;1}^mA_i^\mathrm{T}P_{\mathcal{K}<em>i}(\mu-\rho(A_ix+b_i))<br>$$<br>所谓的广义Hessian，即梯度的B次微分如下式：<br>$$<br>\partial_B\nabla_x\mathcal{L}<em>\rho(x,\lambda,\mu)&#x3D;\rho\Big(G^\mathrm{T}G+\sum</em>{i&#x3D;1}^mA_i^\mathrm{T}\partial_BP</em>{\mathcal{K}<em>i}(\mu-\rho(A_ix+b_i))A_i\Big)<br>$$<br>特别的，对于SOCP，B次微分可以选择为：<br>$$<br>\partial</em>{B} P_{\mathcal{K}<em>{i}}(x) \ni\left{\begin{array}{ll}<br>I</em>{n} &amp; \left|x_{2}\right| \leq x_{1}, \<br>0 &amp; \left|x_{2}\right| \leq-x_{1}, \<br>\left(\begin{array}{cc}<br>\frac{1}{2} &amp; \frac{x_{2}^{\mathrm{T}}}{2\left|x_{2}\right|} \<br>\frac{x_{2}}{2\left|x_{2}\right|} &amp; \frac{x_{1}+\left|x_{2}\right|}{2\left|x_{2}\right|} I_{n-1}-\frac{x_{1} x_{2} x_{2}^{\mathrm{T}}}{2\left|x_{2}\right|^{3}}<br>\end{array}\right) &amp; \left|x_{2}\right|&gt;\left|x_{1}\right| .<br>\end{array}\right.<br>$$</p>
+<h2 id="应用：时间最优路径规划（TOPP）"><a href="#应用：时间最优路径规划（TOPP）" class="headerlink" title="应用：时间最优路径规划（TOPP）"></a>应用：时间最优路径规划（TOPP）</h2><p>路径$q$由弧长变量$s$参数化，TOPP是在给定的平滑路径上生成时间剖面，路径的持续时间应该尽可能地短。</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/16.png" alt="16"></p>
+<p>使用弧长参数s来对路径进行参数化，s的值表示的是距离路径起点所走过的距离。与速度加速度的概念类似：<br>$$<br>{a(s)}&#x3D;\frac{\mathrm{d}^2s}{\mathrm{d}t^2},{b(s)}&#x3D;\left(\frac{\mathrm{d}s}{\mathrm{d}t}\right)^2<br>$$<br>根据运动学基础公式<br>$$<br>v_s^2-v_0^2&#x3D;2as<br>$$<br>距离参数化速度的平方与二阶导数成线性关系<br>$$<br>b^{\prime}(s)&#x3D;2a(s)<br>$$<br>所以，目标函数（时间最优）</p>
+<p>$$<br>T&#x3D;\int_0^T1\mathrm{d}t&#x3D;\int_{s(0)}^{s(T)}\frac{1}{\mathrm{d}s&#x2F;\mathrm{d}t}\mathrm{d}s&#x3D;\int_0^L\frac{1}{\mathrm{d}s&#x2F;\mathrm{d}t}\mathrm{d}s&#x3D;\int_0^L\frac{1}{\sqrt{b(s)}}\mathrm{d}s<br>$$<br>真实速度<br>$$<br>\frac{\mathrm{d}q}{\mathrm{d}t}&#x3D;q’(s)\frac{\mathrm{d}s}{\mathrm{d}t}&#x3D;q’(s)\sqrt{b(s)}<br>$$<br>真实加速度<br>$$<br>\frac{\mathrm{d}^2q}{\mathrm{d}t^2}&#x3D;q’’(s)\left(\frac{\mathrm{d}s}{\mathrm{d}t}\right)^2+q’(s)\frac{\mathrm{d}^2s}{\mathrm{d}t^2}&#x3D;q’’(s)b(s)+q’(s)a(s)<br>$$<br>更重要的是，我们仅考虑向前移动的情况，因此$b(s)\geq0$应该严格成立，并仅在某个或某几个瞬间为0。</p>
+<p>因此我们将这个简单的TOPP问题描述为：<br>$$<br>\begin{aligned}<br>\min_{a(s),b(s)}&amp; \int_{0}^\frac{1}{\sqrt{b(s)}}\mathrm{d}s  \<br>\mathrm{s.t.}&amp; b(s)\geq0,  \forall s\in[0,L],  \<br>&amp;b’(s)&#x3D;2a(s), \forall s\in[0,L],  \<br>&amp;\left|q^{\prime}(s)\sqrt{b(s)}\right|<em>{\infty}\leq v</em>{max}, \forall s\in[0,L],  \<br>&amp;\left|q^{\prime\prime}(s)b(s)+q^{\prime}(s)a(s)\right|<em>\infty\leq{a</em>{max}},\quad\forall s\in[0,L], \<br>&amp;b(0)&#x3D;{b_0},b(L)&#x3D;{b_L}.<br>\end{aligned}<br>$$<br>将上述问题变为SOCP</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/17.png" alt="17"></p>
+<p><img src="/./305-2024-02-24-Math-Optimization/18.png" alt="18"></p>
+<p>其中是引入一些变量进行一些缩放，将表达形式便形成SOCP的形式。<br>增加隐变量$c^k, d^k$，满足：<br>$$<br>c^k\leq\sqrt{b^k},\quad\frac1{c^{k+1}+c^k}\leq d^k<br>$$<br>则通过缩放可以得到$\frac1{\sqrt{b^{k+1}}+\sqrt{b^k}}\leq d^k$，以上每步等号都可以取到，则$\min\frac1{\sqrt{b^{k+1}}+\sqrt{b^k}}\iff\min d^k$，同时$b^k, c^k, d^k$需要满足上面两个约束，即：<br>$$<br>\begin{aligned}<br>\begin{Vmatrix}2\c^{k+1}+c^k-d^k\end{Vmatrix}_2 &amp;\leq c^{k+1}+c^k+d^k,\quad0\leq k\leq K-1, \<br>\begin{Vmatrix}2c^k\b^k-1\end{Vmatrix}_2 &amp;\leq b^k+1,\quad0\leq k\leq K.<br>\end{aligned}<br>$$<br>综上所述TOPP转化SOCP为：</p>
+<p>目标函数：<br>$$<br>\min_{a^k,b^k,c^k,d^k}\sum_{k&#x3D;0}^{K-1}2(s^{k+1}-s^k)d^k<br>$$<br>锥约束：<br>$$<br>\begin{aligned}<br>\begin{Vmatrix}2\c^{k+1}+c^k-d^k\end{Vmatrix}<em>2 &amp;\leq c^{k+1}+c^k+d^k,\quad0\leq k\leq K-1, \<br>\begin{Vmatrix}2c^k\b^k-1\end{Vmatrix}<em>2 &amp;\leq b^k+1,\quad0\leq k\leq K.<br>\end{aligned}<br>$$<br>等式约束：<br>$$<br>\begin{aligned}<br>&amp;2(s^{k+1}-s^k)a^k+b^k-b^{k+1}&#x3D;0,(0\leq k\leq K-1) \<br>&amp;\left|q^{\prime}(s^0)\right|<em>2^2b^0&#x3D;v</em>{start}^2 \<br>&amp;\left|q^{\prime}(s^k)\right|<em>2^2b^K&#x3D;v</em>{end}^2<br>\end{aligned}<br>$$<br>不等式约束：<br>$$<br>\begin{aligned}<br>&amp;-b_k\leq0,(0\leq k\leq K) \<br>&amp;\left(\left(q</em>{y}^{\prime}\left(s^{k}\right)\right)^{2}+\left(q</em>{x}^{\prime}\left(s^{k}\right)\right)^{2}\right)b^{k}-v_{max}^{2}\leq0,(0\leq k\leq K) \<br>&amp;q_x^{\prime\prime}\left(s^k\right)b^k+q_x^{\prime}\left(s^k\right)a^k-a_{max}\leq0,(0\leq k\leq K-1) \<br>&amp;q_y^{\prime\prime}(s^k)b^k+q_y^{\prime}(s^k)a^k-a_{max}\leq0,(0\leq k\leq K-1) \<br>&amp;-q_x^{\prime\prime}(s^k)b^k-q_x^{\prime}(s^k)a^k-a_{max}\leq0,(0\leq k\leq K-1) \<br>&amp;-q_y^{\prime\prime}(s^k)b^k-q_y^{\prime}(s^k)a^k-a_{max}\leq0,(0\leq k\leq K-1)<br>\end{aligned}<br>$$</p>
+<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><h2 id="作业一：证增广拉格朗日函数是关于-x-的凸函数"><a href="#作业一：证增广拉格朗日函数是关于-x-的凸函数" class="headerlink" title="作业一：证增广拉格朗日函数是关于$x$的凸函数"></a>作业一：证增广拉格朗日函数是关于$x$的凸函数</h2><p>原问题是一个凸优化问题：<br>$$<br>\begin{array}{rl}\min&amp;f(x)\\text{s.t.}&amp;g(x)\leq0\&amp;h(x)&#x3D;0\end{array}<br>$$<br>则我们可得</p>
+<ol>
+<li>$f(x)$和$g(x)$都是凸函数，$h(x)$是仿射函数（既凸又凹）。</li>
+</ol>
+<p>且</p>
+<ol start="2">
+<li>凸函数充要条件</li>
+</ol>
+<p>$$<br>f\big(\alpha x+(1-\alpha)y\big)\leq\alpha f(x)+(1-\alpha)f(y),\forall x,y\in domf,\alpha\in(0,1)<br>$$</p>
+<ol start="3">
+<li><p>凸函数加凸函数还是凸函数。$f_1\ldots f_n$为凸函数，$w_{i}\geq0$则$f&#x3D;\sum_i^nw_if_i$为凸函数。</p>
+</li>
+<li><p>若$f$为$I$上的凸函数，$g$在$J(f(I)⊂J)$上递增，且凸性相同，$g◦f$在$I$上有相同的凸性。</p>
+</li>
+</ol>
+<p>上述为证明所用到的定理，其中3和4均可由2推导得到。</p>
+<p>证：</p>
+<p>增广拉格朗日函数为<br>$$<br>\mathcal{L}_\rho(x,\lambda,\mu):&#x3D;f(x)+\frac{\rho}{2}\left{\left|h(x)+\frac{\lambda}{\rho}\right|^2+\left|\max\left[g(x)+\frac{\mu}{\rho},0\right]\right|^2\right}-\frac{1}{2\rho}\left{|\lambda|^2+|\mu|^2\right}<br>$$<br>其中$\rho&gt;0,\mu\succeq0$</p>
+<ul>
+<li><p>$f(x)$为凸函数，$\frac1{2\rho}\big{|\lambda|^2+|\mu|^2\big}$与$x$无关。</p>
+</li>
+<li><p>当$h(x)+\frac{\lambda}{\rho}\ge 0$时，$\left|\left|\cdot\right|\right|^2$在$[0, +\infty]$上单调递增且为凸函数。由定理4我们可得，$\left|h(x)+\frac\lambda\rho\right|^2$为凸函数。</p>
+</li>
+<li><p>与上同理，易得$\max\left[g(x)+\frac{\mu}{\rho},0\right]$为凸函数且$\max\left[g(x)+\frac{\mu}{\rho},0\right] \ge 0$，$\left|\left|\cdot\right|\right|^2$在$[0, +\infty]$上单调递增且为凸函数。由定理4我们可得，$\left|\max\left[g(x)+\frac\mu\rho,0\right]\right|^2$为凸函数。</p>
+</li>
+</ul>
+<p>综上所述，增广拉格朗日函数$\mathcal{L}_\rho(x,\lambda,\mu)$是关于$x$的凸函数。</p>
+<h2 id="作业二：低维半正定的二次规划问题"><a href="#作业二：低维半正定的二次规划问题" class="headerlink" title="作业二：低维半正定的二次规划问题"></a>作业二：低维半正定的二次规划问题</h2><p>原问题：<br>$$<br>\begin{gathered}<br> \<br>\operatorname*{min}<em>{x\in\mathbb{R}^{n}}{\frac{1}{2}}x^{\mathrm{T}}M</em>{\mathcal{Q}}x+c_{\mathcal{Q}}^{\mathrm{T}}x,\mathrm{s.t.}A_{\mathcal{Q}}x\leq b_{\mathcal{Q}} \<br>\mathrm{where},M_{\mathcal{Q}}\succeq0.<br>\end{gathered}<br>$$<br>这是一个半正定的二次规划问题。</p>
+<p>原求解器只能求解严格正定的二次规划问题，所以我们将其构建成一个严格正定的二次规划问题。</p>
+<p>给原目标函数加上一个正则项，变为<br>$$<br>\operatorname*{min}<em>{x\in\mathbb{R}^{n}}{\frac{1}{2}}x^{\mathrm{T}}M</em>{\mathcal{Q}}x+c_{\mathcal{Q}}^{\mathrm{T}}x+\frac{1}{2\rho}\left|x-\bar{x}\right|^2<br>$$<br>展开得<br>$$<br>\operatorname*{min}<em>{x\in\mathbb{R}^{n}}{\frac{1}{2}}x^{\mathrm{T}}M</em>{\mathcal{Q}}x+c_{\mathcal{Q}}^{\mathrm{T}}x+\frac{1}{2\rho}(x^{\mathrm{T}}x+\bar{x}^{\mathrm{T}}\bar{x}-2\bar{x}^{\mathrm{T}}x)<br>$$<br>即<br>$$<br>\operatorname*{min}<em>{x\in\mathbb{R}^{n}}{\frac{1}{2}}x^{\mathrm{T}}(M</em>{\mathcal{Q}}+\frac{1}{\rho})x+(c_{\mathcal{Q}}-\frac{1}{\rho}\bar{x})^{\mathrm{T}}x+\frac{1}{2\rho}\bar{x}^{\mathrm{T}}\bar{x}<br>$$<br>这样上述问题就会变成严格正定的二次规划问题</p>
+<ol>
+<li><p>初始化$\bar{x}$，给定$\delta$</p>
+</li>
+<li><p>求出下列二次规划问题的解$x^*_{i}$</p>
+</li>
+</ol>
+<p>$$<br>\operatorname*{min}<em>{x\in\mathbb{R}^{n}}{\frac{1}{2}}x^{\mathrm{T}}(M</em>{\mathcal{Q}}+\frac{1}{\rho})x+(c_{\mathcal{Q}}-\frac{1}{\rho})^{\mathrm{T}}x<br>$$</p>
+<ol start="4">
+<li>判断$\left|x-\bar{x}\right|^2 \le \delta $，若满足条件迭代结束；若不满足继续迭代。</li>
+<li>$\bar{x} \gets x^*_{i}$，转到步骤2。</li>
+</ol>
+<p>代码见文件task2所示。</p>
+<p><strong>运行</strong></p>
+<ol>
+<li>cd chapter04&#x2F;task2</li>
+<li>编译</li>
+<li>运行可执行文件.&#x2F;sdqp_example</li>
+</ol>
+<p>结果如下：</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/19.png" alt="19"></p>
+<h2 id="作业三：SOCP求解"><a href="#作业三：SOCP求解" class="headerlink" title="作业三：SOCP求解"></a>作业三：SOCP求解</h2><p>原问题：<br>$$<br>\begin{aligned}<br>&amp;\min_{x\in\mathbb{R}^{n}} f^{\mathrm{T}}x  \<br>&amp;\mathrm{s.t.} \left |{Ax+b}\right |_2 \leq c^{\mathrm{T}}x+d<br>\end{aligned}<br>$$<br>其中<br>$$<br>A&#x3D;\begin{bmatrix}7&amp;&amp;&amp;&amp;&amp;&amp;&amp;\&amp;6&amp;&amp;&amp;&amp;&amp;&amp;\&amp;&amp;5&amp;&amp;&amp;&amp;&amp;\&amp;&amp;&amp;4&amp;&amp;&amp;&amp;\&amp;&amp;&amp;&amp;3&amp;&amp;&amp;\&amp;&amp;&amp;&amp;&amp;2&amp;&amp;\&amp;&amp;&amp;&amp;&amp;&amp;1\end{bmatrix},b&#x3D;\begin{bmatrix}1\3\5\7\9\11\13\end{bmatrix},c&#x3D;\begin{bmatrix}1\0\0\0\0\0\0\end{bmatrix},f&#x3D;\begin{bmatrix}1\2\3\4\5\6\7\end{bmatrix},d&#x3D;1<br>$$<br>我们构建一个二阶锥<br>$$<br>\mathcal{K}&#x3D;\left{\left(y_0,y_1\right)^{\mathrm{T}}\in\mathbb{R}\times\mathbb{R}^{n-1}\mid y_0\geq\left|y_1\right|_2\right}<br>$$<br>其中$y_0&#x3D;c^Tx+d,y_1&#x3D;Ax+b$。</p>
+<p>所以原问题变为：<br>$$<br>\min_xf^Tx,s.t.A_ix+b_i\in \mathcal{K}<br>$$<br>其中<br>$$<br>A_i&#x3D;\begin{bmatrix}c^T\A\end{bmatrix},b_i&#x3D;\begin{bmatrix}d\b\end{bmatrix}<br>$$<br>根据前文锥的增广拉个朗日函数可得：<br>$$<br>L_\rho(x,\mu)&#x3D;f^Tx+\frac{\rho}{2}\left(\left|P_{\mathcal{K}}(\frac{\mu}{\rho}-A_ix-b_i)\right|^2\right)<br>$$<br>迭代<br>$$<br>\begin{cases}x\leftarrow\operatorname{argmin}_x\mathcal{L}<em>\rho(x,\lambda,\mu)\ \mu_i\leftarrow P</em>{\mathcal{K}_i}\big(\mu_i-\rho(A_ix+b_i)\big)\\rho\leftarrow\min[(1+\gamma)\rho,~\beta]\end{cases}<br>$$<br>其中$x\leftarrow\operatorname{argmin}_x\mathcal{L}_\rho(x,\lambda,\mu)$可使用前文的半光滑牛顿方法求得。</p>
+<p>具体代码见task3</p>
+<p><strong>运行</strong>：</p>
+<ol>
+<li>cd chapter04&#x2F;task3</li>
+<li>编译</li>
+<li>运行可执行文件.&#x2F;socp_example</li>
+</ol>
+<p>结果如下：</p>
+<p><img src="/./305-2024-02-24-Math-Optimization/20.png" alt="20"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/02/26/305-2024-02-24-Math-Optimization/">http://example.com/2024/02/26/305-2024-02-24-Math-Optimization/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/03/02/306-2024-03-02-Math-Optimization/" title="机器人中的数值优化（五）"><div class="cover" style="background: None"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">机器人中的数值优化（五）</div></div><div class="info-2"><div class="info-item-1">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 附录(笔记)函数的光滑技巧Inf convolution卷积Inf convolution 卷积操作适应于凸函数，Inf convolution 卷积操作的目标是把不光滑的凸函数进行光滑近似，并使得光滑近似后的函数于原函数尽量吻合。      对于两个凸函数$f_1， f_2$，它们之间的Inf convolution 卷积操作记为$f_1\Box f_2$，即找一个$u_1$和$u_2$，满足$u_1+u_2&#x3D;x$的条件下，使得$f_1(u_1)+f_2(u_2)$最大或最小，如下面的第一个表达式所示，由于满足$u_1+u_2&#x3D;x$，因此可消去一个$u$进行简化，简化后的表达式如下面第二个式子所示：$$\begin{aligned}(f_1\Box f_2)(x)&amp;&#x3D;\inf_{(u_1,u_2)\in\mathbb{R}^d\times\mathb...</div></div></div></a><a class="pagination-related" href="/2024/02/20/304-2024-02-20-Math-Optimization/" title="机器人中的数值优化（三）"><div class="cover" style="background: None"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">机器人中的数值优化（三）</div></div><div class="info-2"><div class="info-item-1">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 有约束优化（笔记）分类 低维线性规划（LP）目标函数：$$f(x_1,x_2\ldots x_d)&#x3D;c_1x_1+c_2x_2+\cdots+c_dx_d$$约束：$$\begin{array}{l}a_{1,1} x_{1}+\cdots+a_{1, d} x_{d} \leqslant b_{1} \a_{2,1} x_{1}+\cdots+a_{2, d} x_{d} \leqslant b_{2} \a_{n, 1} x_{1}+\cdots+a_{n, d} x_{d} \leqslant b_{n} \\end{array}$$ 每个约束表示$\mathbb{R}^d$中的一个半空间，半空间的交集形成可行域，可行域是$\mathbb{R}^d$中的凸多面体。 我们使$\vec{c}&#x3D;(c_1,c_2,\ldots c_d)$（即目标函数梯度），沿此方向最前的...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%94%A5%E8%A7%84%E5%88%92%EF%BC%88%E7%AC%94%E8%AE%B0%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">锥规划（笔记）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%A5%E5%92%8C%E5%AF%B9%E7%A7%B0%E9%94%A5"><span class="toc-number">1.1.</span> <span class="toc-text">锥和对称锥</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%96%E9%94%A5"><span class="toc-number">1.1.1.</span> <span class="toc-text">尖锥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%B8%E9%94%A5"><span class="toc-number">1.1.2.</span> <span class="toc-text">凸锥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E9%94%A5%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8"><span class="toc-number">1.1.3.</span> <span class="toc-text">常见的锥及其性质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E9%94%A5"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">对称锥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%B3%E6%96%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">平方操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%B1%E5%88%86%E8%A7%A3"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">谱分解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E9%94%A5%E7%9A%84%E8%87%AA%E5%AF%B9%E5%81%B6%E6%80%A7"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">对称锥的自对偶性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E9%94%A5%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">对称锥的应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%A5%E5%A2%9E%E5%B9%BF%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">锥增广拉格朗日函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC"><span class="toc-number">1.2.1.</span> <span class="toc-text">推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%A5%E6%8A%95%E5%BD%B1%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">1.2.2.</span> <span class="toc-text">锥投影的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E5%85%89%E6%BB%91%E7%89%9B%E9%A1%BF%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.3.</span> <span class="toc-text">半光滑牛顿方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%EF%BC%9A%E6%97%B6%E9%97%B4%E6%9C%80%E4%BC%98%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92%EF%BC%88TOPP%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">应用：时间最优路径规划（TOPP）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-number">2.</span> <span class="toc-text">作业</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%B8%80%EF%BC%9A%E8%AF%81%E5%A2%9E%E5%B9%BF%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%87%BD%E6%95%B0%E6%98%AF%E5%85%B3%E4%BA%8E-x-%E7%9A%84%E5%87%B8%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">作业一：证增广拉格朗日函数是关于$x$的凸函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%BA%8C%EF%BC%9A%E4%BD%8E%E7%BB%B4%E5%8D%8A%E6%AD%A3%E5%AE%9A%E7%9A%84%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">作业二：低维半正定的二次规划问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E4%B8%89%EF%BC%9ASOCP%E6%B1%82%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">作业三：SOCP求解</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/18/hello-world/" title="Hello World">Hello World</a><time datetime="2025-08-18T07:15:49.592Z" title="Created 2025-08-18 15:15:49">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建"><img src="https://arvinzyj.github.io/2024/11/09/502-2024-11-09-others-Ubuntu/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HEXO个人博客搭建"/></a><div class="content"><a class="title" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建">HEXO个人博客搭建</a><time datetime="2025-08-17T16:00:00.000Z" title="Created 2025-08-18 00:00:00">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装"><img src="https://arvinzyj.github.io/2024/11/09/502-2024-11-09-others-Ubuntu/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="系统安装"/></a><div class="content"><a class="title" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装">系统安装</a><time datetime="2024-11-08T16:00:00.000Z" title="Created 2024-11-09 00:00:00">2024-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）"><div style="background: None"></div></a><div class="content"><a class="title" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）">自动驾驶预测与决策规划（三）</a><time datetime="2024-04-07T16:00:00.000Z" title="Created 2024-04-08 00:00:00">2024-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）"><div style="background: None"></div></a><div class="content"><a class="title" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）">自动驾驶预测与决策规划（二）</a><time datetime="2024-03-19T16:00:00.000Z" title="Created 2024-03-20 00:00:00">2024-03-20</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

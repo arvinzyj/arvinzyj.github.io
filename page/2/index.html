@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2024/01/10/302-2024-01-10-Math-Optimization/" title="机器人中的数值优化（一）"><div class="post-bg" style="background: None"></div></a></div><div class="recent-post-info"><a class="article-title" href="/2024/01/10/302-2024-01-10-Math-Optimization/" title="机器人中的数值优化（一）">机器人中的数值优化（一）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-01-09T16:00:00.000Z" title="Created 2024-01-10 00:00:00">2024-01-10</time></span></div><div class="content">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 凸优化基础最优化问题概括最优化问题一般可以描述为：$$\begin{array}{rl}\min&amp;f(x)\\mathrm{s.t.}&amp;g(x)\leq0\&amp;h(x)&#x3D;0\end{array}$$ 凸集合与凸函数凸集对于$\mathbb{R}^{n}$中的两个点$x_{1}\ne x_{2}$，形如$y&#x3D;\theta x_{1}+(1-\theta) x_{2}$的点形成了过点$x_{1}$和$x_{2}$的直线。当$0\le \theta \le1$，这样的点形成了连接点的$x_{1}$和$x_{2}$的线段。  定义：如果过集合C中任意两点的直线都在C内，则成C为放射集，即$$\theta x_{1}, x_{2} \in C \Longrightarrow \theta x_{1}+(1-\theta) x_{2} \in C, \fora...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/11/22/501-2023-11-22-Others-AutoDL/" title="AutoDL"><img class="post-bg" src="https://arvinzyj.github.io/2023/11/22/501-2023-11-22-Others-AutoDL/0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AutoDL"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/11/22/501-2023-11-22-Others-AutoDL/" title="AutoDL">AutoDL</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-11-21T16:00:00.000Z" title="Created 2023-11-22 00:00:00">2023-11-22</time></span></div><div class="content">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：通过AutoDL平台租赁云服务器，配置环境，远程桌面。  vscode远程SSH链接参考链接：https://www.autodl.com/docs/ssh/ vscode安装插件SSH，添加SSH，输入SSH指令，点击connect，输入密码。  然后为remote添加常用的插件。 ros-melodic安装参考链接：http://www.autolabor.com.cn/book/ROSTutorials/chapter1/12-roskai-fa-gong-ju-an-zhuang/127-zi-65993a-qi-ta-ros-ban-ben-an-zhuang.html 安装源官方默认安装源: 1sudo sh -c &#x27;echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#x27;  或来自国内中科大的安装源...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/10/10/103-2023-10-10-Paper-PointerNetworks/" title="TSP-RL"><img class="post-bg" src="https://arvinzyj.github.io/2023/10/10/103-2023-10-10-Paper-PointerNetworks/0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="TSP-RL"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/10/103-2023-10-10-Paper-PointerNetworks/" title="TSP-RL">TSP-RL</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-10-09T16:00:00.000Z" title="Created 2023-10-10 00:00:00">2023-10-10</time></span></div><div class="content">文档维护：Arvin 网页部署：Arvin ▶ TSP TSP问题（Traveling Salesman Problem），是数学领域中著名问题之一。假设有一个旅行商人要拜访n个城市，他必须选择所要走的路径，路径的限制是每个城市只能拜访一次，而且最后要回到原来出发的城市。路径的选择目标是要求所选的路径路程为所有路径中的最小值。 从图论的角度来看，TSP问题的输入是一个边带权的完全图，目标是找一个权值和最小的哈密顿回路。TSP问题可大致分为对称TSP问题和非对称TSP问题。所谓对称指的是在模型中，城市 u 到城市 v 的距离与城市 v 到城市 u 的距离是一样的，其在图中的体现就是对称TSP问题的输入一般是无向图，而非对称TSP问题的输入往往是有向图。本文主要讨论的是对称TSP问题。 假设给定一个 n 个点的带权完全图 G ，本文需要找到它权值和最小的哈密顿回路。或许会有人觉得这是求最短路，但是这并不是求最短路。最短路是求两点之间权值和最小的路径，而TSP求的是一个回路，并不能直接通过求解最短路进行求解。所有可能的路线共有$(n−1){!}$ 种 下面是两篇经典的使用神经网络和强化...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/09/05/301-2023-09-05-Math-LieGroup/" title="李群李代数（一）"><img class="post-bg" src="https://arvinzyj.github.io/2023/09/05/301-2023-09-05-Math-LieGroup/0.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="李群李代数（一）"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/05/301-2023-09-05-Math-LieGroup/" title="李群李代数（一）">李群李代数（一）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-09-04T16:00:00.000Z" title="Created 2023-09-05 00:00:00">2023-09-05</time></span></div><div class="content">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：这篇的内容主要来自于《slam十四讲：从入门到实践》中的第三、四章，是为了引出李群李代数，文章大多记录了一些结论，如果对推导有兴趣可以去看书中详细的过程。  基础知识三维空间刚体运动旋转矩阵1.反对称矩阵 设$A&#x3D;(a_{ij}){n \times n}$，若其中元素满足$a{ij}&#x3D;a_{ji},\forall i,j\Leftrightarrow A^T&#x3D;A$，则称$A$是对称矩阵；若其元素满足$a_{ij}&#x3D;-a_{ji},\forall i,j\Leftrightarrow A^T&#x3D;-A$，则称$A$为反对称矩阵。 若$A$是反对称矩阵，则$a_{ij}&#x3D;-a_{ij}$，当$i&#x3D;j$时，便有$a_{ij}&#x3D;0$，即反对称矩阵对角线上的元全为零，而位于主对角线两侧对称的元素反号。 2.旋转矩阵 欧氏变换由旋转和平移组成。我们首先考虑旋转。设某个单位正交基$(e_1, e_2, e_3)$经过一次旋转变成了$(e^{\prime}_1, ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/08/28/102-2023-08-27-Paper-RLConstraintManifold/" title="RL in Constraint Manifold"><img class="post-bg" src="https://arvinzyj.github.io/2023/08/28/102-2023-08-27-Paper-RLConstraintManifold/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RL in Constraint Manifold"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/08/28/102-2023-08-27-Paper-RLConstraintManifold/" title="RL in Constraint Manifold">RL in Constraint Manifold</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-08-27T16:00:00.000Z" title="Created 2023-08-28 00:00:00">2023-08-28</time></span></div><div class="content">文档维护：Arvin 网页部署：Arvin ▶ Abstract由于许多实际问题，包括安全、机械约束和磨损，机器人技术中的强化学习极具挑战性。 通常，这些问题在机器学习文献中没有被考虑。在现实世界中应用强化学习的一个关键问题是安全探索，这需要在整个学习过程中满足物理和安全约束。为了在这样一个安全关键的环境中进行探索，利用机器人模型和约束等已知信息有助于提供更强大的安全保证。利用这些知识，我们提出了一种新的方法，在满足学习过程中的约束的情况下，有效地学习仿真中的机器人任务。 Introduction深度强化学习虽然在一些问题上表现的很好，但是在现实世界中使用强化学习还是一项具有挑战性的任务，因为典型的强化学习算法，通过不断试错来最大化累计奖励，并没有考虑在探索过程中对约束的满足，而在实际世界中智能体在探索过程中要受到许多约束。 文章提出了一种新方法，在流形空间的切平面上执行动作（Acting on the Tangent Space of the Constraint Manifold, ATACOM）。该方法将约束强化学习问题转化成无约束强化学习问题。 ATACOM的优势可以概括...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/07/19/101-2023-07-19-Paper-Adam/" title="Adam"><img class="post-bg" src="https://arvinzyj.github.io/2023/07/19/101-2023-07-19-Paper-Adam/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Adam"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/19/101-2023-07-19-Paper-Adam/" title="Adam">Adam</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2023-07-18T16:00:00.000Z" title="Created 2023-07-19 00:00:00">2023-07-19</time></span></div><div class="content">文档维护：Arvin 网页部署：Arvin ▶ Abstract介绍了一种基于低阶矩自适应估计的随机目标函数一阶梯度优化算法Adam。该方法易于实现，计算效率高，内存需求少，对梯度的对角线重新缩放不变，非常适合数据和参数量大的问题。 该方法也适用于非平稳目标和具有非常嘈杂和&#x2F;或稀疏梯度的问题。超参数有直观的解释，通常不需要调优。讨论了一些与相关算法的联系，这些算法是Adam的灵感来源。我们还分析了算法的理论收敛性，并给出了与在线凸优化框架下的最知名结果相当的收敛速度遗憾界。实证结果表明，Adam方法在实践中效果良好，优于其他随机优化方法。最后，我们讨论了基于无穷范数的Adam的变体AdaMax。 IntroductionAdam，一种只需要一节梯度且内存需求很小的高效随机优化方法。该方法通过估计梯度的第一阶矩和第二阶矩来计算不同参数的个体自适应学习率。算法伪代码：  参数：  $t$：时间步数 $\alpha$：学习率（步长） $\theta$：参数 $f(\theta)$：目标函数（损失函数） $g_t$：梯度，即$g_t &#x3D; \frac{\partial ...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/18/hello-world/" title="Hello World">Hello World</a><time datetime="2025-08-18T07:15:49.592Z" title="Created 2025-08-18 15:15:49">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建"><img src="https://arvinzyj.github.io/2024/11/09/502-2024-11-09-others-Ubuntu/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HEXO个人博客搭建"/></a><div class="content"><a class="title" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建">HEXO个人博客搭建</a><time datetime="2025-08-17T16:00:00.000Z" title="Created 2025-08-18 00:00:00">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装"><img src="https://arvinzyj.github.io/2024/11/09/502-2024-11-09-others-Ubuntu/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="系统安装"/></a><div class="content"><a class="title" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装">系统安装</a><time datetime="2024-11-08T16:00:00.000Z" title="Created 2024-11-09 00:00:00">2024-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）"><div style="background: None"></div></a><div class="content"><a class="title" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）">自动驾驶预测与决策规划（三）</a><time datetime="2024-04-07T16:00:00.000Z" title="Created 2024-04-08 00:00:00">2024-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）"><div style="background: None"></div></a><div class="content"><a class="title" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）">自动驾驶预测与决策规划（二）</a><time datetime="2024-03-19T16:00:00.000Z" title="Created 2024-03-20 00:00:00">2024-03-20</time></div></div></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      <a class="card-more-btn" href="/archives/"
+            title="View More">
+            <i class="fas fa-angle-right"></i>
+          </a>
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              August 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/11/">
+            <span class="card-archive-list-date">
+              November 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/04/">
+            <span class="card-archive-list-date">
+              April 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/03/">
+            <span class="card-archive-list-date">
+              March 2024
+            </span>
+            <span class="card-archive-list-count">3</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/02/">
+            <span class="card-archive-list-date">
+              February 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/01/">
+            <span class="card-archive-list-date">
+              January 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/11/">
+            <span class="card-archive-list-date">
+              November 2023
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2023/10/">
+            <span class="card-archive-list-date">
+              October 2023
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">16</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-08-19T08:49:50.933Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

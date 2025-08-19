@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>机器人中的数值优化（二） | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 无约束优化拟牛顿法为什么要用拟牛顿法？一般情况下，当函数为曲线平滑的凸函数时，我们使用牛顿法。牛顿法如下： 通过二阶泰勒展开：$$f(\boldsymbol{x})\approx\hat{f}\left(\">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器人中的数值优化（二）">
+<meta property="og:url" content="http://example.com/2024/01/15/303-2024-01-17-Math-Optimization/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 无约束优化拟牛顿法为什么要用拟牛顿法？一般情况下，当函数为曲线平滑的凸函数时，我们使用牛顿法。牛顿法如下： 通过二阶泰勒展开：$$f(\boldsymbol{x})\approx\hat{f}\left(\">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2024-01-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-19T08:41:18.253Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "机器人中的数值优化（二）",
+  "url": "http://example.com/2024/01/15/303-2024-01-17-Math-Optimization/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2024-01-14T16:00:00.000Z",
+  "dateModified": "2025-08-19T08:41:18.253Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/01/15/303-2024-01-17-Math-Optimization/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '机器人中的数值优化（二）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background: None;"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">机器人中的数值优化（二）</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">机器人中的数值优化（二）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-01-14T16:00:00.000Z" title="Created 2024-01-15 00:00:00">2024-01-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-08-19T08:41:18.253Z" title="Updated 2025-08-19 16:41:18">2025-08-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>文档维护：<code>Arvin</code></p>
+<p>网页部署：<code>Arvin</code></p>
+<p>▶</p>
+<p><strong>写在前面</strong>：本文内容是作者在深蓝学院<a target="_blank" rel="noopener" href="https://www.shenlanxueyuan.com/course/659">机器人中的数值优化</a>学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。</p>
+<h1 id="无约束优化"><a href="#无约束优化" class="headerlink" title="无约束优化"></a>无约束优化</h1><h2 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h2><h3 id="为什么要用拟牛顿法？"><a href="#为什么要用拟牛顿法？" class="headerlink" title="为什么要用拟牛顿法？"></a>为什么要用拟牛顿法？</h3><p>一般情况下，当函数为曲线平滑的凸函数时，我们使用牛顿法。牛顿法如下：</p>
+<p>通过二阶泰勒展开：<br>$$<br>f(\boldsymbol{x})\approx\hat{f}\left(\boldsymbol{x}\right)\triangleq f(\boldsymbol{x}_k)+\nabla f(\boldsymbol{x}_k)^T(\boldsymbol{x}-\boldsymbol{x}_k)+\frac12(\boldsymbol{x}-\boldsymbol{x}_k)^T\nabla^2f(\boldsymbol{x}_k)(\boldsymbol{x}-\boldsymbol{x}_k)	\tag{1}<br>$$<br>最小化二次近似：<br>$$<br>\begin{aligned}&amp;\nabla\hat{f}\left(\boldsymbol{x}\right)&#x3D;\nabla^2f(\boldsymbol{x}_k)(\boldsymbol{x}-\boldsymbol{x}_k)+\nabla f(\boldsymbol{x}_k)&#x3D;\mathbf{0}\&amp;\Longrightarrow\boldsymbol{x}&#x3D;\boldsymbol{x}_k-\left[\nabla^2f(\boldsymbol{x}_k)\right]^{-1}\nabla f(\boldsymbol{x}_k)\end{aligned}	\tag{2}<br>$$<br>规定：<br>$$<br>\nabla^2f(\boldsymbol{x}<em>k)\succ\boldsymbol{O}	\tag{3}<br>$$<br>牛顿步长：<br>$$<br>\boldsymbol{x}</em>{k+1}&#x3D;\boldsymbol{x}_k-\left[\nabla^2f(\boldsymbol{x}<em>k)\right]^{-1}\nabla f(\boldsymbol{x}<em>k)	\tag{4}<br>$$<br>即：<br>$$<br>\boldsymbol{x}</em>{k+1}&#x3D;\boldsymbol{x}<em>k-H^{-1}</em>{t}g</em>{t}	\tag{5}<br>$$<br>牛顿法的一些问题：</p>
+<ul>
+<li>当当前点距离极小点距离较远时，使用牛顿法需要计算二阶海森矩阵，造成计算力浪费。</li>
+<li>海森矩阵需要满足很多条件，当当前点在线性函数上时，海森矩阵值为零，则步长就会变为无穷大。</li>
+<li>当函数为非凸函数，牛顿法可能会向更高点迭代。</li>
+</ul>
+<p>牛顿法近似，海森矩阵需要正定可逆：</p>
+<p>$$<br>f(x)-f\left(x_{k}\right) \approx\left(x-x_{k}\right)^{T} g+\frac{1}{2}\left(x-x_{k}\right)^{T} H\left(x-x_{k}\right)	\tag{6}<br>$$</p>
+<p>$$<br>\text { Solve } H_{k} d_{k}&#x3D;-g_{k}<br>$$</p>
+<p>因为迭代需要沿着梯度下降的方向，所以在几何上搜索方向要与负梯度成锐角：<br>$$<br>\langle-g,-H^{-1}g\rangle&#x3D;\langle g,H^{-1}g\rangle&#x3D;g^TH^{-1}g&gt;0	\tag{8}<br>$$<br>因此只有海森矩阵正定可逆时，使用牛顿法才不会出现上述的问题（向更高点迭代，步长变为无穷大）。</p>
+<h3 id="如何构造拟牛顿法？"><a href="#如何构造拟牛顿法？" class="headerlink" title="如何构造拟牛顿法？"></a>如何构造拟牛顿法？</h3><p>拟牛顿法近似<br>$$<br>f(x)-f(x_k)\approx\left(x-x_k\right)^Tg_k+\frac12\left(x-x_k\right)^TM_k{\left(x-x_k\right)}	\tag{9}<br>$$</p>
+<p>$$<br>\text { Solve } M^{k} d^{k}&#x3D;-g^{k}<br>$$</p>
+<p>拟牛顿法的目的就是为了避免上述问题，同时避免求逆节约计算资源，加快运算速度。我们构造一个矩阵来逼近海森矩阵或者他的逆。</p>
+<p>为了方便推导，我们假设$f(x)$是二次函数，此时海森矩阵$H$是常数矩阵，任意两点$x_k$与$x_{k+1}$处的梯度之差是：<br>$$<br>\bigtriangledown f(x_{k+1})-\bigtriangledown f(x_{k})&#x3D;H\cdot(x_{k+1}-x_{k})	\tag{10}<br>$$<br>即：<br>$$<br>x_{k+1}-x_{k}&#x3D;H^{-1}\cdot[\bigtriangledown f(x_{k+1})-\bigtriangledown f(x_{k})]	\tag{11}<br>$$<br>对于非二次型的情况，也近似满足上式关系。</p>
+<p>因为：<br>$$<br>\begin{aligned}\Delta x&amp;&#x3D;x_{k+1}-x_k\\Delta g&amp;&#x3D;\nabla f{\left(x_{k+1}\right)}-\nabla f{\left(x_k\right)}\end{aligned}	\tag{12}<br>$$<br>我们可得：<br>$$<br>\Delta g\approx M^{k+1}\Delta x<br>$$<br>or：<br>$$<br>\Delta x\approx B^{k+1}\Delta g	\tag{13}<br>$$<br>其中，$M_{k+1}B_{k+1}&#x3D;I$</p>
+<p>以上就是<strong>拟牛顿条件</strong>，不同的拟牛顿法，区别就在于如何逼近不同的矩阵。</p>
+<p>DFP法逼近的是$H^{-1}$。</p>
+<p>BFGS法逼近的是$H$。</p>
+<h3 id="DFP法"><a href="#DFP法" class="headerlink" title="DFP法"></a>DFP法</h3><p>DFP是用$D_k$来近似海森矩阵的逆矩阵$H_{k}^{-1}$</p>
+<p><strong>推导</strong></p>
+<p>现在已知拟牛顿条件：<br>$$<br>\Delta x_k&#x3D;D_{k+1}\cdot\Delta g_k	\tag{14}<br>$$<br>假设已知$D_k$，希望用叠加的方式求$D_{k+1}$，即$D_{k+1}&#x3D;D_k+\Delta D_k$，代入得到：<br>$$<br>\Delta D_k\Delta g_k&#x3D;\Delta x_k-D_k\Delta g_k	\tag{15}<br>$$<br>假设满足这个等式的$\Delta D_k$是这样的形式（我也不知道为什么要这么假设，可能是为了保证正定可逆）：<br>$$<br>\Delta D_k&#x3D;\Delta x_k\cdot q_k^T-D_k\Delta g_k\cdot w_k^T	\tag{16}<br>$$<br>对照可以得到：<br>$$<br>q_k^T\cdot\Delta g_k&#x3D;w_k^T\cdot\Delta g_k&#x3D;I_n	\tag{17}<br>$$<br>要保证$\Delta D_k$是对称的，参照其表达式，最简单的就是令：<br>$$<br>\begin{gathered}q_k&#x3D;\alpha_k\Delta x_k\w_k&#x3D;\beta_kD_k\Delta g_k\end{gathered}	\tag{18}<br>$$<br>可得：<br>$$<br>\begin{gathered}\alpha_k&#x3D;\frac1{\Delta x_k^T\Delta g_k}\\beta_k&#x3D;\frac1{\Delta g_k^TD_k\Delta g_k}\end{gathered}	\tag{19}<br>$$<br>然后带入式16可得：<br>$$<br>\Delta D_k&#x3D;\frac{\Delta x_k\Delta x_k^T}{\Delta x_k^T\Delta g_k}-\frac{D_k\Delta g_k\Delta g_k^TD_k}{\Delta g_k^TD_k\Delta g_k}	\tag{20}<br>$$<br>虽然式子看起来很复杂但是并不涉及求逆，第一项仅涉及向量乘法，第二项仅涉及矩阵乘法。</p>
+<p><strong>DFP算法步骤</strong></p>
+<p>(1) 给定初始点$x_0$，精度$\epsilon$，令$D_0&#x3D;I$</p>
+<p>(2) 计算搜索方向<br>$$<br>d_{k}&#x3D;-D_{k}\nabla f(x_{k})<br>$$<br>(3) 从当前点出发，沿着搜索方向做一维搜索，获得最优步长并更新参数：<br>$$<br>\lambda_k&#x3D;\arg\min_\lambda f(x_{k}+\lambda\cdot d_{k})<br>$$</p>
+<p>$$<br>x_{k+1}&#x3D;x_{k}+\lambda_k\cdot d_{k}<br>$$</p>
+<p>(4)判断精度，若$|g_{k+1}|&lt;\epsilon$则停止迭代，否则转 (5) </p>
+<p>(5) 计算 $\Delta g&#x3D;g_{k+1}-g_k$, $\Delta x&#x3D;x_{k+1}-x_{k}$,更新 $D$<br>$$<br>\begin{aligned}D_{k+1}&#x3D;D_k+\frac{\Delta x_k\Delta x_k^T}{\Delta x_k^T\Delta g_k}-\frac{D_k\Delta g_k\Delta g_k^TD_k}{\Delta g_k^TD_k\Delta g_k}\end{aligned}<br>$$</p>
+<p>(6)$\quad k&#x3D;k+1$,转(2)</p>
+<h3 id="BFGS法"><a href="#BFGS法" class="headerlink" title="BFGS法"></a>BFGS法</h3><p>BFGS是最流行的拟牛顿算法。与DFP算法相比，性能更佳。它是构建一个矩阵来逼近海森矩阵$H_k$。</p>
+<p><strong>推导</strong><br>$$<br>\Delta g_t&#x3D;M_{k+1}\cdot\Delta x_k	\tag{21}<br>$$<br>和DFP类似，我们可以得到<br>$$<br>\Delta M_k&#x3D;\frac{\Delta g_k\Delta g_k^T}{\Delta g_k^T\Delta x_k}-\frac{M_k\Delta x_k\Delta x_k^TM_k}{\Delta x_k^TM_k\Delta x_k}	\tag{22}<br>$$<br>下面的推导需要用到Sherman-Morrison公式：</p>
+<p>假设$A$是$n$阶可逆矩阵，$t$是常量，$u, v$是$n$维向量，且$A+uv^T$也是可逆矩阵，则<br>$$<br>(A+\frac{uv^T}{t})^{-1}&#x3D;A^{-1}-\frac{A^{-1}uv^TA^{-1}}{t+v^TA^{-1}u}	\tag{22}<br>$$<br>应用两次上述公式可以得到：<br>$$<br>M_{k+1}^{-1}&#x3D;\left(I-\frac{\Delta x\Delta g^T}{\Delta g^T\Delta x}\right)M_k^{-1}\left(I-\frac{\Delta g\Delta x^T}{\Delta g^T\Delta x}\right)+\frac{\Delta x\Delta x^T}{\Delta g^T\Delta x}<br>$$<br>且：$B_K &#x3D; M_k^{-1}$，则有<br>$$<br>B^{k+1}&#x3D;\left(I-\frac{\Delta x\Delta g^T}{\Delta g^T\Delta x}\right)B^k\left(I-\frac{\Delta g\Delta x^T}{\Delta g^T\Delta x}\right)+\frac{\Delta x\Delta x^T}{\Delta g^T\Delta x}<br>$$</p>
+<p><strong>BFGS算法步骤</strong></p>
+<h4 id="严格凸函数"><a href="#严格凸函数" class="headerlink" title="严格凸函数"></a>严格凸函数</h4><p>对于严格凸函数（strictly convex），伪代码如下：</p>
+<p><img src="/./303-2024-01-17-Math-Optimization/1.png" alt="1"></p>
+<h4 id="不严格凸函数"><a href="#不严格凸函数" class="headerlink" title="不严格凸函数"></a>不严格凸函数</h4><p><strong>Wolfe条件</strong></p>
+<ul>
+<li>weak Wolfe conditions<br>$$<br>\begin{array}{c}f(x^k)-f(x^k+\alpha d)\geq-c_1\cdot\alpha d^\mathrm{T}\nabla f(x^k)\d^\mathrm{T}\nabla f(x^k+\alpha d)\geq c_2\cdot d^\mathrm{T}\nabla f(x^k)\end{array}<br>$$</li>
+</ul>
+<p>​       其中，$0&lt;c_1&lt;c_2&lt;1$，通常$c_1&#x3D;10^{-4},~c_2&#x3D;0.9$。</p>
+<ul>
+<li>strong Wolfe conditions<br>$$<br>\begin{array}{c}f(x^k)-f(x^k+\alpha d)\geq-c_1\cdot\alpha d^\mathrm{T}\nabla f(x^k)\\left|d^\mathrm{T}\nabla f(x^k+\alpha d)\right|\leq\left|c_2\cdot d^\mathrm{T}\nabla f(x^k)\right|\end{array}<br>$$<br>其中，$0&lt;c_1&lt;c_2&lt;1$，通常$c_1&#x3D;10^{-4},\mathrm{~}c_2&#x3D;0.9$</li>
+</ul>
+<p><strong>cautious update</strong></p>
+<p>仅仅是wolfe条件无法保证收敛，BFGS算法还需要cautious update<br>$$<br>B^{k+1}&#x3D;\begin{cases}\left(I-\frac{\Delta x\Delta g^T}{\Delta g^T\Delta x}\right)B^k\biggl(I-\frac{\Delta g\Delta x^T}{\Delta g^T\Delta x}\biggr)+\frac{\Delta x\Delta x^T}{\Delta g^T\Delta x}&amp;&amp;\mathrm{<del>if</del>}\Delta g^T\Delta x&gt;\epsilon||g_k||\Delta x^T\Delta x,&amp;\epsilon&#x3D;10^{-6}\B^k&amp;&amp;\mathrm{~otherwise}\end{cases}<br>$$<br>具体步骤：</p>
+<p><img src="/./303-2024-01-17-Math-Optimization/2.png" alt="2"></p>
+<h3 id="LBFGS法"><a href="#LBFGS法" class="headerlink" title="LBFGS法"></a>LBFGS法</h3><p>BFGS公式：<br>$$<br>B^{k+1}&#x3D;\left(I-\frac{\Delta x\Delta g^T}{\Delta g^T\Delta x}\right)B^k\left(I-\frac{\Delta g\Delta x^T}{\Delta g^T\Delta x}\right)+\frac{\Delta x\Delta x^T}{\Delta g^T\Delta x}<br>$$<br>我们使用BFGS算法来利用单位矩阵逐步逼近H矩阵，但是每次计算都要储存B矩阵，如果维度特别大，就会占用许多内存。我们可以用时间换空间的方法，我们不储存B矩阵，而是储存$\Delta x$和$\Delta g$。比如数据集有10000个维度，由储存10000×10000的矩阵变为了储存是个1×10000的10个向量，有效储存了空间。</p>
+<p>并且有时候需要迭代许多轮，我们规定只存储m个回合的的数据。</p>
+<p><img src="/./303-2024-01-17-Math-Optimization/3.png" alt="3"></p>
+<ul>
+<li>Lewis &amp; Overton line search:</li>
+</ul>
+<p>​		weak Wolfe conditions<br>$$<br>\begin{gathered}S(\alpha):f{\left(x^k\right)}-f{\left(x^k+\alpha d\right)}\geq-c_1\cdot\alpha d^\mathrm{T}\nabla f{\left(x^k\right)}\C(\alpha):d^\mathrm{T}\nabla f{\left(x^k+\alpha d\right)}\geq c_2\cdot d^\mathrm{T}\nabla f{\left(x^k\right)}\end{gathered}<br>$$</p>
+<p><img src="/./303-2024-01-17-Math-Optimization/4.png" alt="4"></p>
+<p>综上对于非凸非光滑函数：</p>
+<p><img src="/./303-2024-01-17-Math-Optimization/5.png" alt="5"></p>
+<h2 id="共轭梯度法"><a href="#共轭梯度法" class="headerlink" title="共轭梯度法"></a>共轭梯度法</h2><h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><h2 id="BFGS"><a href="#BFGS" class="headerlink" title="BFGS"></a>BFGS</h2><p><strong>环境</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROS-Melodic</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir catkin_ws</span><br><span class="line">cd catkin_ws</span><br><span class="line">mkdir src</span><br><span class="line">cp gcopter /catkin_ws/src</span><br><span class="line">catkin_make</span><br><span class="line">source ./devel/set.bash</span><br><span class="line">roslaunch gcopter curve_gen.launch</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong></p>
+<p><img src="/./303-2024-01-17-Math-Optimization/6.gif" alt="6"></p>
+<p><strong>说明</strong></p>
+<ol>
+<li><p>三次样条（Cubic Spline）:</p>
+<blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62860859">三次样条</a></p>
+</blockquote>
+<p>$$<br>\begin{aligned}<br>\rho(s) &amp;&#x3D; a_i + b_is_i + c_is_i^2 + d_is_i^3,\ s_i\in(0,1)\<br>\rho(s)^{‘} &amp;&#x3D;b_i + 2c_is_i + 3d_is_i^2,\<br>\rho(s)^{‘’} &amp;&#x3D;2c_i + 6d_is_i<br>\end{aligned}<br>$$</p>
+<p>and  natural spline is: $\rho(s_0)^{‘’} &#x3D; \rho(s_N)^{‘’} &#x3D; 0$. </p>
+</li>
+<li><p>目标函数:<br>$$<br>\begin{aligned}<br>\text{cost}&amp;&#x3D;\text{Energy}(x_1,…,x_{N-1}) + \text{Potential}(x_1,…,x_{N-1})  \<br>&amp;&#x3D; \sum_{i&#x3D;0}^{N}(4c_i^2 + 12c_id_i + 12d_i^2)\<br>+\ 1000\sum_{i&#x3D;1}^{N-1}\sum_{j&#x3D;1}^{M}\left(\max(r_j - |x_i - o_i|,0)\right)  \<br>\text{where},&amp;\<br>x_i &amp; &#x3D; [\bar x_i, \bar y_i]<em>{1\times2}\<br>a_i &amp;&#x3D; x_i\<br>b_i &amp;&#x3D; D_i\<br>c_i &amp;&#x3D;-3(x_i - x</em>{i+1}) -2D_i - D_{i+1}\<br>d_i &amp;&#x3D; 2(x_i - x_{i+1}) + D_i + D_{i+1}\<br>\text{and,  here:}&amp;\<br>&amp;\begin{bmatrix} D_1\ D_2\ …\D_{N-1} \end{bmatrix}<em>{(N-1)\times 2}<br>&#x3D; 	\begin{bmatrix}<br>    4 &amp;1 \ 1 &amp; 4 &amp; 1 \&amp; …&amp; …&amp; …\&amp; &amp;1 &amp;4 &amp;1 \ &amp;&amp;&amp;1 &amp;4<br>    \end{bmatrix}^{-1}</em>{(N-1)\times(N-1)}<br>\begin{bmatrix} 3(x_2-x_0)\  3(x_2-x_0)\ …\3(x_N-x_{N-2}) \end{bmatrix}_{(N-1)\times 2}<br>\end{aligned}<br>$$</p>
+</li>
+<li><p>计算梯度:</p>
+<ul>
+<li>Energy Gradient</li>
+</ul>
+</li>
+</ol>
+<p>$$<br>\begin{aligned}<br>   \frac{\partial E}{\partial x}|<em>{x_1,..,x</em>{N-1}}&amp;&#x3D;<br>       \sum_{i&#x3D;0}^{N-1}[<br>       (8c_i + 12d_i)\frac{\partial c_i}{\partial x}<br>       + (12c_i + 24d_i)\frac{\partial d_i}{\partial x} ]\</p>
+<pre><code>   \text&#123;where&#125;,&amp;\\
+   \frac&#123;\partial c_i&#125;&#123;\partial x&#125;|_&#123;x_1,..,x_&#123;N-1&#125;&#125;&amp;=
+   -3\frac&#123;\partial (x_i - x_&#123;i+1&#125;)&#125;&#123;\partial x&#125; 
+   -2\frac&#123;\partial D_i&#125;&#123;\partial x&#125; - \frac&#123;\partial D_&#123;i+1&#125;&#125;&#123;\partial x&#125;\\
+   
+   \frac&#123;\partial d_i&#125;&#123;\partial x&#125;|_&#123;x_1,..,x_&#123;N-1&#125;&#125;&amp;=
+   2\frac&#123;\partial (x_i - x_&#123;i+1&#125;)&#125;&#123;\partial x&#125; 
+   +\frac&#123;\partial D_i&#125;&#123;\partial x&#125; + \frac&#123;\partial D_&#123;i+1&#125;&#125;&#123;\partial x&#125;\\
+
+   \frac&#123;\partial&#125;&#123;\partial x&#125;\begin&#123;bmatrix&#125; x_0 - x_1\\
+   x_1 -x_2 \\...\\ x_N - x_&#123;N-1&#125;\end&#123;bmatrix&#125;&amp;=
+   \begin&#123;bmatrix&#125;
+       -1 \\ 1 &amp; -1 \\&amp; ...&amp; ...\\&amp; &amp;1 &amp;-1 \\ &amp;&amp;&amp;1 &amp;-1
+       \end&#123;bmatrix&#125;_&#123;(N-1)\times(N-1)&#125;
+       
+   \end&#123;aligned&#125;
+       \\
+       \frac&#123;\partial D_i&#125;&#123;\partial x&#125;
+       = 	\begin&#123;bmatrix&#125;
+       4 &amp;1 \\ 1 &amp; 4 &amp; 1 \\&amp; ...&amp; ...&amp; ...\\&amp; &amp;1 &amp;4 &amp;1 \\ &amp;&amp;&amp;1 &amp;4
+       \end&#123;bmatrix&#125;^&#123;-1&#125;_&#123;(N-1)\times(N-1)&#125;
+       \begin&#123;bmatrix&#125;
+       0 &amp;3 \\ -3 &amp; 0 &amp; 3 \\&amp; ...&amp; ...&amp; ...\\&amp; &amp;-3 &amp;0 &amp;3 \\ &amp;&amp;&amp;-3 &amp;0
+       \end&#123;bmatrix&#125;_&#123;(N-1)\times(N-1)&#125;
+</code></pre>
+<p>$$</p>
+<ul>
+<li>Potential Gradient<br>$$<br>\begin{aligned}<br>\frac{\partial P}{\partial \bar x}|<em>{\bar x_1,..,\bar x</em>{N-1}} &amp;&#x3D;<br>-1000\sum_{j&#x3D;1}^M\frac{\bar x_i - a_j}{\sqrt{(\bar x_i- a_j)^2+(\bar y_i -b_j)^2}}\<br>\frac{\partial P}{\partial \bar y}|<em>{\bar y_1,..,\bar y</em>{N-1}} &amp;&#x3D;<br>-1000\sum_{j&#x3D;1}^M\frac{\bar y_i - a_j}{\sqrt{(\bar x_i- a_j)^2+(\bar y_i -b_j)^2}}<br>\end{aligned}<br>$$</li>
+</ul>
+<ol start="4">
+<li>Lewis &amp; Overton line search</li>
+</ol>
+<p><img src="/./303-2024-01-17-Math-Optimization/7.png" alt="7"></p>
+<blockquote>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/songbinxu/article/details/79677948">拟牛顿法（DFP、BFGS、L-BFGS</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77497823">牛顿法和拟牛顿法</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/91230555">BFGS算法的迭代公式推导</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/01/15/303-2024-01-17-Math-Optimization/">http://example.com/2024/01/15/303-2024-01-17-Math-Optimization/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/02/20/304-2024-02-20-Math-Optimization/" title="机器人中的数值优化（三）"><div class="cover" style="background: None"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">机器人中的数值优化（三）</div></div><div class="info-2"><div class="info-item-1">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 有约束优化（笔记）分类 低维线性规划（LP）目标函数：$$f(x_1,x_2\ldots x_d)&#x3D;c_1x_1+c_2x_2+\cdots+c_dx_d$$约束：$$\begin{array}{l}a_{1,1} x_{1}+\cdots+a_{1, d} x_{d} \leqslant b_{1} \a_{2,1} x_{1}+\cdots+a_{2, d} x_{d} \leqslant b_{2} \a_{n, 1} x_{1}+\cdots+a_{n, d} x_{d} \leqslant b_{n} \\end{array}$$ 每个约束表示$\mathbb{R}^d$中的一个半空间，半空间的交集形成可行域，可行域是$\mathbb{R}^d$中的凸多面体。 我们使$\vec{c}&#x3D;(c_1,c_2,\ldots c_d)$（即目标函数梯度），沿此方向最前的...</div></div></div></a><a class="pagination-related" href="/2024/01/10/302-2024-01-10-Math-Optimization/" title="机器人中的数值优化（一）"><div class="cover" style="background: None"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">机器人中的数值优化（一）</div></div><div class="info-2"><div class="info-item-1">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：本文内容是作者在深蓝学院机器人中的数值优化学习时的笔记，作者按照自己的理解进行了记录，如果有错误的地方还请执政。如涉侵权，请联系删除。 凸优化基础最优化问题概括最优化问题一般可以描述为：$$\begin{array}{rl}\min&amp;f(x)\\mathrm{s.t.}&amp;g(x)\leq0\&amp;h(x)&#x3D;0\end{array}$$ 凸集合与凸函数凸集对于$\mathbb{R}^{n}$中的两个点$x_{1}\ne x_{2}$，形如$y&#x3D;\theta x_{1}+(1-\theta) x_{2}$的点形成了过点$x_{1}$和$x_{2}$的直线。当$0\le \theta \le1$，这样的点形成了连接点的$x_{1}$和$x_{2}$的线段。  定义：如果过集合C中任意两点的直线都在C内，则成C为放射集，即$$\theta x_{1}, x_{2} \in C \Longrightarrow \theta x_{1}+(1-\theta) x_{2} \in C, \fora...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">无约束优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">拟牛顿法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">为什么要用拟牛顿法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9E%84%E9%80%A0%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">如何构造拟牛顿法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DFP%E6%B3%95"><span class="toc-number">1.1.3.</span> <span class="toc-text">DFP法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BFGS%E6%B3%95"><span class="toc-number">1.1.4.</span> <span class="toc-text">BFGS法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A5%E6%A0%BC%E5%87%B8%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">严格凸函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E4%B8%A5%E6%A0%BC%E5%87%B8%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">不严格凸函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LBFGS%E6%B3%95"><span class="toc-number">1.1.5.</span> <span class="toc-text">LBFGS法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">共轭梯度法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-number">2.</span> <span class="toc-text">作业</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BFGS"><span class="toc-number">2.1.</span> <span class="toc-text">BFGS</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/18/hello-world/" title="Hello World">Hello World</a><time datetime="2025-08-18T07:15:49.592Z" title="Created 2025-08-18 15:15:49">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建"><img src="https://arvinzyj.github.io/2024/11/09/502-2024-11-09-others-Ubuntu/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HEXO个人博客搭建"/></a><div class="content"><a class="title" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建">HEXO个人博客搭建</a><time datetime="2025-08-17T16:00:00.000Z" title="Created 2025-08-18 00:00:00">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装"><img src="https://arvinzyj.github.io/2024/11/09/502-2024-11-09-others-Ubuntu/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="系统安装"/></a><div class="content"><a class="title" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装">系统安装</a><time datetime="2024-11-08T16:00:00.000Z" title="Created 2024-11-09 00:00:00">2024-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）"><div style="background: None"></div></a><div class="content"><a class="title" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）">自动驾驶预测与决策规划（三）</a><time datetime="2024-04-07T16:00:00.000Z" title="Created 2024-04-08 00:00:00">2024-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）"><div style="background: None"></div></a><div class="content"><a class="title" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）">自动驾驶预测与决策规划（二）</a><time datetime="2024-03-19T16:00:00.000Z" title="Created 2024-03-20 00:00:00">2024-03-20</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
