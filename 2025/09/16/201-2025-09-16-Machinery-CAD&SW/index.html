@@ -1,0 +1,317 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>CAD&amp;SW | Arvin</title><meta name="author" content="Arvin"><meta name="copyright" content="Arvin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="文档维护：Arvin 网页部署：Arvin ▶ 写在前面：机械电气设计软件使用CAD&amp;SW CAD&amp;SolidworksCAD&amp;SW下载安装下载地址 SW出工程图转为CAD 参考链接  我们的目标是：图纸的文字不要出现乱码的情况，并且在SOLIDWORKS工程图中的图层信息能够得到保留。 根据国标规范制图的要求，可以自定义以下图层：     图层名称 通常对应的线型&#x2F;颜色">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAD&amp;SW">
+<meta property="og:url" content="http://example.com/2025/09/16/201-2025-09-16-Machinery-CAD&SW/index.html">
+<meta property="og:site_name" content="Arvin">
+<meta property="og:description" content="文档维护：Arvin 网页部署：Arvin ▶ 写在前面：机械电气设计软件使用CAD&amp;SW CAD&amp;SolidworksCAD&amp;SW下载安装下载地址 SW出工程图转为CAD 参考链接  我们的目标是：图纸的文字不要出现乱码的情况，并且在SOLIDWORKS工程图中的图层信息能够得到保留。 根据国标规范制图的要求，可以自定义以下图层：     图层名称 通常对应的线型&#x2F;颜色">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/cover-img.jpg">
+<meta property="article:published_time" content="2025-09-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-18T08:55:39.971Z">
+<meta property="article:author" content="Arvin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/cover-img.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CAD&SW",
+  "url": "http://example.com/2025/09/16/201-2025-09-16-Machinery-CAD&SW/",
+  "image": "http://example.com/img/cover-img.jpg",
+  "datePublished": "2025-09-15T16:00:00.000Z",
+  "dateModified": "2025-09-18T08:55:39.971Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Arvin",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/my-icon.png"><link rel="canonical" href="http://example.com/2025/09/16/201-2025-09-16-Machinery-CAD&amp;SW/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CAD&SW',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/nacho.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/cover-img.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/my-icon.png" alt="Logo"><span class="site-name">Arvin</span></a><a class="nav-page-title" href="/"><span class="site-name">CAD&amp;SW</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">CAD&amp;SW</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-18T08:55:39.971Z" title="更新于 2025-09-18 16:55:39">2025-09-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>文档维护：<code>Arvin</code></p>
+<p>网页部署：<code>Arvin</code></p>
+<p>▶</p>
+<p><strong>写在前面</strong>：机械电气设计软件使用CAD&amp;SW</p>
+<h1 id="CAD-amp-Solidworks"><a href="#CAD-amp-Solidworks" class="headerlink" title="CAD&amp;Solidworks"></a>CAD&amp;Solidworks</h1><h2 id="CAD-amp-SW下载安装"><a href="#CAD-amp-SW下载安装" class="headerlink" title="CAD&amp;SW下载安装"></a>CAD&amp;SW下载安装</h2><p><a target="_blank" rel="noopener" href="https://www.ruancang.net/">下载地址</a></p>
+<h2 id="SW出工程图转为CAD"><a href="#SW出工程图转为CAD" class="headerlink" title="SW出工程图转为CAD"></a>SW出工程图转为CAD</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://gitcode.com/open-source-toolkit/d8235">参考链接</a></p>
+</blockquote>
+<p>我们的目标是：图纸的文字不要出现乱码的情况，并且在SOLIDWORKS工程图中的图层信息能够得到保留。</p>
+<p>根据国标规范制图的要求，可以自定义以下图层：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">图层名称</th>
+<th style="text-align:left">通常对应的线型/颜色 (示例)</th>
+<th style="text-align:left">主要包含对象 (详细说明)</th>
+<th style="text-align:left">补充说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1轮廓实线层</td>
+<td style="text-align:left">连续实线 (白色/黑色)</td>
+<td style="text-align:left"><strong>零件或部件的可见轮廓线</strong>。这是图纸中最粗、最显眼的线，用于表示从当前视角可见的所有边界和棱线。</td>
+<td style="text-align:left">这是主体的轮廓，线宽最大（例如0.5mm）。</td>
+</tr>
+<tr>
+<td style="text-align:left">2细实线层</td>
+<td style="text-align:left">连续实线 (灰色/绿色)</td>
+<td style="text-align:left"><strong>过渡线、尺寸线、尺寸界线、指引线、剖面线（剖面线）、螺纹牙底线、齿轮齿根线</strong>等。</td>
+<td style="text-align:left">此层线宽最细（例如0.25mm或更细）。</td>
+</tr>
+<tr>
+<td style="text-align:left">3中心线层</td>
+<td style="text-align:left">点划线 (红色/中心线线型)</td>
+<td style="text-align:left"><strong>中心线、轴线</strong>。用于表示圆柱、圆锥体的回转轴、零件的对称中心线、孔位的中心、齿轮的分度圆等。</td>
+<td style="text-align:left">超出轮廓约2-5mm，是重要的定位基准。</td>
+</tr>
+<tr>
+<td style="text-align:left">4虚线层</td>
+<td style="text-align:left">虚线 (黄色/虚线线型)</td>
+<td style="text-align:left"><strong>不可见轮廓线</strong>。表示从当前视角被遮挡的、但确实存在的轮廓线（如背后的孔、槽、台阶等）。</td>
+<td style="text-align:left">线宽与细实线相同或略粗，但低于轮廓实线。</td>
+</tr>
+<tr>
+<td style="text-align:left">5剖面线层</td>
+<td style="text-align:left">连续实线 (青色/蓝色)</td>
+<td style="text-align:left"><strong>剖面线（剖视图中的填充图案）</strong>。用于表示零件被剖切后的断面部分。</td>
+<td style="text-align:left">线宽与细实线相同。不同零件或材料使用不同的图案（ANSI31表示金属等）。</td>
+</tr>
+<tr>
+<td style="text-align:left">6文字层</td>
+<td style="text-align:left">连续实线 (绿色)</td>
+<td style="text-align:left"><strong>所有文字注释、技术要求、标题栏文字</strong>。包括零件名称、材料、热处理、表面处理要求等所有非尺寸标注的文字。</td>
+<td style="text-align:left">确保文字清晰可读，与背景对比明显。</td>
+</tr>
+<tr>
+<td style="text-align:left">7标注层</td>
+<td style="text-align:left">连续实线 (绿色)</td>
+<td style="text-align:left"><strong>所有尺寸标注、尺寸公差、形位公差框格、基准代号、表面粗糙度符号</strong>。</td>
+<td style="text-align:left">这是制造和检验的直接依据，必须清晰、准确、完整。</td>
+</tr>
+<tr>
+<td style="text-align:left">8符号标注层</td>
+<td style="text-align:left">连续实线 (紫色)</td>
+<td style="text-align:left"><strong>焊接符号、热处理符号、特定工艺符号（如涂覆范围）、毛坯符号</strong>等。</td>
+<td style="text-align:left">将这些特殊符号单独分层，便于管理和隐藏。</td>
+</tr>
+<tr>
+<td style="text-align:left">9双点划线层</td>
+<td style="text-align:left">双点划线 (洋红/假想线型)</td>
+<td style="text-align:left"><strong>极限位置轮廓线、假想投影轮廓线、中断线、剖切平面线（剖切轨迹）、毛坯轮廓线、辅助零件轮廓线</strong>。</td>
+<td style="text-align:left">用于表示相邻零件、运动部件的极限位置、或中断画法等，是“假想”的轮廓。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li><ul>
+<li><p>下载<a target="_blank" rel="noopener" href="https://eng.m.fontke.com/font/66317729/download/">长仿宋字体</a>、<a target="_blank" rel="noopener" href="https://url03.ctfile.com/f/24333903-727609396-cf0a38?p=5831">仿宋GB2312</a>（因为windows10缺少工程制图的长仿宋体和仿宋GB2312）</p>
+</li>
+<li><p>解压后右键<code>为所有用户安装</code></p>
+<p><img src="/2025/09/16/201-2025-09-16-Machinery-CAD&SW/1.png" alt="1"></p>
+</li>
+</ul>
+</li>
+<li><p>下载SW<a target="_blank" rel="noopener" href="https://gitcode.com/open-source-toolkit/55787">工程图国标模板</a></p>
+<ul>
+<li><p>解压后将模板文件<code>.drwdot</code>文件导入到SW默认模版文件位置</p>
+</li>
+<li><p>默认模板文件位置可以在SW软件内查看</p>
+<p><img src="/2025/09/16/201-2025-09-16-Machinery-CAD&SW/4.png" alt="4"></p>
+</li>
+</ul>
+</li>
+<li><p>下载<a target="_blank" rel="noopener" href="https://gitcode.com/open-source-toolkit/d8235">映射文件</a>资源</p>
+<ul>
+<li><p>解压后修改<code>drawfontmap.txt</code>，添加长仿宋体映射（这三列分别是SW、 CAD、 比例）</p>
+<p><img src="/2025/09/16/201-2025-09-16-Machinery-CAD&SW/2.png" alt="2"></p>
+</li>
+<li><p>把drawfontmap.txt 放到SW目录下的\SolidWorks Corp\SolidWorks\data文件夹内.】</p>
+</li>
+<li><p>把SW转CAD图层映射.txt 放到SW目录下的\SolidWorks Corp\SolidWorks\data文件夹内.</p>
+</li>
+<li><p>设置SW转CAD输出选项如图:</p>
+<p><img src="/2025/09/16/201-2025-09-16-Machinery-CAD&SW/3.png" alt="3"></p>
+</li>
+</ul>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Arvin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/09/16/201-2025-09-16-Machinery-CAD&amp;SW/">http://example.com/2025/09/16/201-2025-09-16-Machinery-CAD&amp;SW/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Arvin</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/cover-img.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建"><img class="cover" src="https://arvinzyj.github.io/2025/08/18/503-2025-08-18-Others-HexoBlog/10.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">HEXO个人博客搭建</div></div><div class="info-2"><div class="info-item-1">文档维护：Arvin 网页部署：Arvin ▶ 写在前面：HEXO搭建个人博客 HEXO个人博客搭建 参考链接1参考链接2  环境准备安装Node.js参考链接  Node.js 是一个开源的、跨平台的 JavaScript 运行时环境，它允许开发者在服务器端运行 JavaScript 代码。Node.js 最初由 Ryan Dahl 于 2009 年创建，目的是为了构建高性能的网络应用。下载官网   下载后开始安装   更改安装位置不要安装在C盘，其余默认即可。安装后打开终端，输入以下命令查看是否安装成功   在刚才的安装位置中新建两个文件夹node_global和node_cache，然后在终端中输入命令更改下载缓存位置   按照下列步骤配置文件   更改环境变量  然后把下面的“C:\User\AppData\Roaming\npm”修改为“D:\Program\nodejs\node_global”，即可    安装git点击下载链接下载安装程序按照步骤安装即可（更改安装路径，其余默认即可）。 安装hexo 安装HEXO 1npm install -g hexo-cli ...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/nacho.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Arvin</div><div class="author-info-description">世界上只有一种真正的英雄主义，就是认清了生活的真相后还依然热爱它</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Welcome to my blog!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CAD-amp-Solidworks"><span class="toc-number">1.</span> <span class="toc-text">CAD&amp;Solidworks</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CAD-amp-SW%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">CAD&amp;SW下载安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SW%E5%87%BA%E5%B7%A5%E7%A8%8B%E5%9B%BE%E8%BD%AC%E4%B8%BACAD"><span class="toc-number">1.2.</span> <span class="toc-text">SW出工程图转为CAD</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/09/16/201-2025-09-16-Machinery-CAD&amp;SW/" title="CAD&amp;SW"><img src="/img/cover-img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CAD&amp;SW"/></a><div class="content"><a class="title" href="/2025/09/16/201-2025-09-16-Machinery-CAD&amp;SW/" title="CAD&amp;SW">CAD&amp;SW</a><time datetime="2025-09-15T16:00:00.000Z" title="发表于 2025-09-16 00:00:00">2025-09-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建"><img src="https://arvinzyj.github.io/2025/08/18/503-2025-08-18-Others-HexoBlog/10.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HEXO个人博客搭建"/></a><div class="content"><a class="title" href="/2025/08/18/503-2025-08-18-Others-HexoBlog/" title="HEXO个人博客搭建">HEXO个人博客搭建</a><time datetime="2025-08-17T16:00:00.000Z" title="发表于 2025-08-18 00:00:00">2025-08-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装"><img src="https://arvinzyj.github.io/2024/11/09/502-2024-11-09-Others-Ubuntu/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="系统安装"/></a><div class="content"><a class="title" href="/2024/11/09/502-2024-11-09-Others-Ubuntu/" title="系统安装">系统安装</a><time datetime="2024-11-08T16:00:00.000Z" title="发表于 2024-11-09 00:00:00">2024-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）"><img src="https://arvinzyj.github.io/2024/04/08/309-2024-04-08-Math-AutoDriver/7.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自动驾驶预测与决策规划（三）"/></a><div class="content"><a class="title" href="/2024/04/08/309-2024-04-08-Math-AutoDriver/" title="自动驾驶预测与决策规划（三）">自动驾驶预测与决策规划（三）</a><time datetime="2024-04-07T16:00:00.000Z" title="发表于 2024-04-08 00:00:00">2024-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）"><img src="https://arvinzyj.github.io/2024/03/20/308-2024-03-20-Math-AutoDriver/3.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="自动驾驶预测与决策规划（二）"/></a><div class="content"><a class="title" href="/2024/03/20/308-2024-03-20-Math-AutoDriver/" title="自动驾驶预测与决策规划（二）">自动驾驶预测与决策规划（二）</a><time datetime="2024-03-19T16:00:00.000Z" title="发表于 2024-03-20 00:00:00">2024-03-20</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/cover-img.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Arvin</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
